@@ -126,6 +126,9 @@
     margin-top:auto; font-family:'JetBrains Mono', monospace; font-size:11px;
     color:var(--orange); letter-spacing:0.5px;
   }
+  .module-card.soon{ opacity:0.6; cursor:default; }
+  .module-card.soon:hover{ border-color:var(--panel-line); transform:none; }
+  .module-card .soon-tag{ color:var(--yellow); }
 
   /* ---- Chat shell ---- */
   .chat-wrap{
@@ -206,70 +209,81 @@
       <div class="brand-name">Industr<em>Cons</em> AI</div>
     </div>
   </div>
-  <div class="tagline">TIKINTI ÜÇÜN SÜNİ İNTELLEKT KÖMƏKÇİSİ</div>
+  <div class="tagline" data-i18n="tagline">TIKINTI ÜÇÜN SÜNİ İNTELLEKT KÖMƏKÇİSİ</div>
   <div class="lang-switch">
-    <button class="active" data-lang="az">AZ</button>
-    <button data-lang="en">EN</button>
+    <button class="active" data-lang="az" id="btnAz">AZ</button>
+    <button data-lang="en" id="btnEn">EN</button>
   </div>
 </header>
 
 <section class="hero">
-  <div class="eyebrow">Construction Copilot</div>
+  <div class="eyebrow" data-i18n="eyebrow">Construction Copilot</div>
   <h1 data-i18n="hero_title">Sahədə lazım olanı saniyələr içində tap.</h1>
-  <p data-i18n="hero_sub">NCR, QA/QC şablonları, xərc hesablamaları, iş elanları və təlimlər — hamısı bir yerdə. Aşağıda yazın, IndustrCons AI sizi düzgün alətə yönləndirəcək.</p>
+  <p data-i18n="hero_sub">NCR, QA/QC şablonları, xərc hesablamaları, iş elanları və təlimlər — hamısı bir yerdə. Aşağıda yazın, IndustrCons AI sizi düzgün alətə yönləndirəcək. Knowledge Center və bənzəri yeni modullar tezliklə əlavə olunacaq.</p>
 </section>
 
 <div class="modules">
-  <a class="module-card" href="modules/docs/" data-module="docs">
+  <a class="module-card" href="https://industrconsdocs.netlify.app/" target="_blank" rel="noopener" data-module="docs">
     <span class="idx">DOC</span>
     <h3 data-i18n="mod_docs_title">IndustrCons Docs</h3>
     <p data-i18n="mod_docs_sub">NCR, Risk Assessment, Slump Test və digər formalar. PDF ixracı ilə.</p>
-    <span class="go">AÇ →</span>
+    <span class="go" data-i18n="go">AÇ →</span>
   </a>
-  <a class="module-card" href="modules/cost-estimator/" data-module="estimator">
+  <a class="module-card" href="https://industrconsestimator.netlify.app/" target="_blank" rel="noopener" data-module="estimator">
     <span class="idx">EST</span>
     <h3 data-i18n="mod_est_title">Cost Estimator</h3>
     <p data-i18n="mod_est_sub">Beton, material və əmək xərclərini avtomatik hesabla.</p>
-    <span class="go">AÇ →</span>
+    <span class="go" data-i18n="go">AÇ →</span>
   </a>
   <a class="module-card" href="modules/jobs/" data-module="jobs">
     <span class="idx">JOB</span>
     <h3 data-i18n="mod_jobs_title">IndustrCons Jobs</h3>
     <p data-i18n="mod_jobs_sub">Sahə mühəndisi və digər tikinti vakansiyaları.</p>
-    <span class="go">AÇ →</span>
+    <span class="go" data-i18n="go">AÇ →</span>
   </a>
   <a class="module-card" href="modules/academy/" data-module="academy">
     <span class="idx">EDU</span>
     <h3 data-i18n="mod_academy_title">IndustrCons Academy</h3>
     <p data-i18n="mod_academy_sub">Primavera, AutoCAD, QA/QC və layihə idarəçiliyi kursları.</p>
-    <span class="go">AÇ →</span>
+    <span class="go" data-i18n="go">AÇ →</span>
   </a>
+  <div class="module-card soon" data-module="knowledge">
+    <span class="idx">KC</span>
+    <h3 data-i18n="mod_kc_title">Knowledge Center</h3>
+    <p data-i18n="mod_kc_sub">Tikinti biliyi, standartlar və bələdçilər — tezliklə.</p>
+    <span class="go soon-tag" data-i18n="soon">TEZLİKLƏ</span>
+  </div>
 </div>
 
 <div class="chat-wrap">
   <div class="chat-frame">
     <div class="chat-head">
-      <span><span class="dot" id="statusDot"></span><span id="statusText">qoşulur...</span></span>
+      <span><span class="dot" id="statusDot"></span><span id="statusText" data-i18n="connecting">qoşulur...</span></span>
       <span>v0.1 · MVP</span>
     </div>
     <div class="chat-log" id="chatLog">
       <div class="msg bot">
         <div class="label">INDUSTRCONS AI</div>
-        <div class="bubble">Salam 👋 Mən IndustrCons AI-yam. Sahədə nə lazımdır? Məsələn: "Sabah beton tökəcəyik" və ya "NCR lazımdır".</div>
+        <div class="bubble" id="welcomeMsg" data-i18n="welcome">Salam 👋 Mən IndustrCons AI-yam. Sahədə nə lazımdır? Məsələn: "Sabah beton tökəcəyik" və ya "NCR lazımdır".</div>
       </div>
     </div>
     <form class="chat-input" id="chatForm">
       <input type="text" id="chatInput" placeholder="Sualınızı yazın..." autocomplete="off" required>
-      <button type="submit" id="sendBtn">Göndər</button>
+      <button type="submit" id="sendBtn" data-i18n="send">Göndər</button>
     </form>
-    <div class="config-note" id="configNote">
+    <div class="config-note" id="configNote" data-i18n="config_note">
       ⚙ Backend qoşulmayıb. <code>js/api-client.js</code> içində <code>GATEWAY_URL</code> dəyərini öz Cloudflare Worker ünvanınızla əvəz edin.
     </div>
   </div>
 </div>
 
 <footer>
-  IndustrCons AI — <a href="#" id="whatsappLink">WhatsApp Community-ə qoşul</a> · <a href="https://github.com/" id="repoLink">GitHub</a>
+  <div style="margin-bottom:10px;">
+    IndustrCons AI — <a href="https://chat.whatsapp.com/JS7XVLh8v2I4HPLLshwTr2" target="_blank" rel="noopener" id="whatsappLink" data-i18n="whatsapp_link">WhatsApp Community-ə qoşul</a>
+  </div>
+  <div style="color:var(--steel); font-size:12px;">
+    <span data-i18n="contact_label">Əlaqə</span>: Elvin Əsgərov · <a href="tel:+994775889727">+994 77 588 97 27</a> · <a href="mailto:elvinasgarov12@gmail.com">elvinasgarov12@gmail.com</a>
+  </div>
 </footer>
 
 <script src="js/api-client.js"></script>
