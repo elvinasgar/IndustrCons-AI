@@ -9,7 +9,7 @@
 
 // ---- CONFIG: allowed origins (lock this to your real GitHub Pages domain) ----
 const ALLOWED_ORIGINS = [
-  "https://industrconsgateaway.netlify.app/",
+  "https://industrconsgateaway.netlify.app/.netlify/functions/chat",
   "http://localhost:5500", // local testing (e.g. VSCode Live Server)
   "http://127.0.0.1:5500"
 ];
