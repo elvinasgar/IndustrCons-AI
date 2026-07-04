@@ -7,7 +7,7 @@
 // 👉 STEP 1: After you deploy the Worker (see gateway/README section),
 // paste its URL here. It will look like:
 // https://industrcons-gateway.<your-subdomain>.workers.dev/v1/chat
-const GATEWAY_URL = "https://industrconsgateaway.netlify.app/";
+const GATEWAY_URL = "https://industrconsgateaway.netlify.app/.netlify/functions/chat";
 
 const IndustrConsAPI = {
   connected: GATEWAY_URL.indexOf("REPLACE-ME") === -1,
