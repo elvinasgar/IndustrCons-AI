@@ -62,7 +62,7 @@ const IndustrConsAPI = {
         reply: az
           ? "Bunun üçün NCR formu lazımdır. IndustrCons Docs-u açıram."
           : "You'll need an NCR form for that. Opening IndustrCons Docs.",
-        action: { module: "docs", url: "modules/docs/" }
+        action: { module: "docs", url: "https://industrconsdocs.netlify.app/" }
       };
     }
     if (m.includes("beton") || m.includes("concrete") || m.includes("m²") || m.includes("m2")) {
@@ -70,7 +70,7 @@ const IndustrConsAPI = {
         reply: az
           ? "Bu iş üçün sizə Concrete Pour Card, Slump Test Form və Risk Assessment lazımdır. Cost Estimator-u açıram ki, miqdarı birlikdə hesablayaq."
           : "For this you'll need a Concrete Pour Card, Slump Test Form and Risk Assessment. Opening the Cost Estimator so we can calculate quantities together.",
-        action: { module: "cost-estimator", url: "modules/cost-estimator/" }
+        action: { module: "cost-estimator", url: "https://industrconsestimator.netlify.app/" }
       };
     }
     if (m.includes("qa") || m.includes("qc") || m.includes("şablon") || m.includes("template")) {
@@ -78,7 +78,7 @@ const IndustrConsAPI = {
         reply: az
           ? "IndustrCons Docs-da uyğun QA/QC şablonunu tapıram."
           : "Looking for the right QA/QC template in IndustrCons Docs.",
-        action: { module: "docs", url: "modules/docs/" }
+        action: { module: "docs", url: "https://industrconsdocs.netlify.app/" }
       };
     }
     if (m.includes("iş") || m.includes("job") || m.includes("vakansiya")) {
