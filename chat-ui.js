@@ -15,14 +15,85 @@
   let currentLang = "az";
   let history = [];
 
+  // ---- i18n dictionary ----
+  const I18N = {
+    az: {
+      tagline: "TIKINTI ÜÇÜN SÜNİ İNTELLEKT KÖMƏKÇİSİ",
+      eyebrow: "Construction Copilot",
+      hero_title: "Sahədə lazım olanı saniyələr içində tap.",
+      hero_sub: "NCR, QA/QC şablonları, xərc hesablamaları, iş elanları və təlimlər — hamısı bir yerdə. Aşağıda yazın, IndustrCons AI sizi düzgün alətə yönləndirəcək. Knowledge Center və bənzəri yeni modullar tezliklə əlavə olunacaq.",
+      mod_docs_title: "IndustrCons Docs",
+      mod_docs_sub: "NCR, Risk Assessment, Slump Test və digər formalar. PDF ixracı ilə.",
+      mod_est_title: "Cost Estimator",
+      mod_est_sub: "Beton, material və əmək xərclərini avtomatik hesabla.",
+      mod_jobs_title: "IndustrCons Jobs",
+      mod_jobs_sub: "Sahə mühəndisi və digər tikinti vakansiyaları.",
+      mod_academy_title: "IndustrCons Academy",
+      mod_academy_sub: "Primavera, AutoCAD, QA/QC və layihə idarəçiliyi kursları.",
+      mod_kc_title: "Knowledge Center",
+      mod_kc_sub: "Tikinti biliyi, standartlar və bələdçilər — tezliklə.",
+      go: "AÇ →",
+      soon: "TEZLİKLƏ",
+      connecting: "qoşulur...",
+      welcome: 'Salam 👋 Mən IndustrCons AI-yam. Sahədə nə lazımdır? Məsələn: "Sabah beton tökəcəyik" və ya "NCR lazımdır".',
+      send: "Göndər",
+      config_note: '⚙ Backend qoşulmayıb. <code>js/api-client.js</code> içində <code>GATEWAY_URL</code> dəyərini öz Cloudflare Worker ünvanınızla əvəz edin.',
+      whatsapp_link: "WhatsApp Community-ə qoşul",
+      contact_label: "Əlaqə",
+      placeholder: "Sualınızı yazın...",
+      live: "canlı",
+      demo: "demo rejimi"
+    },
+    en: {
+      tagline: "AI COPILOT FOR CONSTRUCTION",
+      eyebrow: "Construction Copilot",
+      hero_title: "Find what you need on-site in seconds.",
+      hero_sub: "NCR, QA/QC templates, cost calculations, job listings and training — all in one place. Type below and IndustrCons AI will route you to the right tool. Knowledge Center and more modules are coming soon.",
+      mod_docs_title: "IndustrCons Docs",
+      mod_docs_sub: "NCR, Risk Assessment, Slump Test and other forms, with PDF export.",
+      mod_est_title: "Cost Estimator",
+      mod_est_sub: "Automatically calculate concrete, material and labor costs.",
+      mod_jobs_title: "IndustrCons Jobs",
+      mod_jobs_sub: "Site Engineer and other construction job listings.",
+      mod_academy_title: "IndustrCons Academy",
+      mod_academy_sub: "Primavera, AutoCAD, QA/QC and project management courses.",
+      mod_kc_title: "Knowledge Center",
+      mod_kc_sub: "Construction knowledge, standards and guides — coming soon.",
+      go: "OPEN →",
+      soon: "COMING SOON",
+      connecting: "connecting...",
+      welcome: 'Hi 👋 I\'m IndustrCons AI. What do you need on site? For example: "We\'re pouring concrete tomorrow" or "I need an NCR".',
+      send: "Send",
+      config_note: '⚙ Backend not connected. In <code>js/api-client.js</code>, replace <code>GATEWAY_URL</code> with your Cloudflare Worker address.',
+      whatsapp_link: "Join the WhatsApp Community",
+      contact_label: "Contact",
+      placeholder: "Type your question...",
+      live: "live",
+      demo: "demo mode"
+    }
+  };
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    const dict = I18N[lang];
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.documentElement.lang = lang;
+    chatInput.placeholder = dict.placeholder;
+    setStatus();
+  }
+
   function setStatus() {
+    const dict = I18N[currentLang];
     if (IndustrConsAPI.connected) {
       statusDot.classList.add("live");
-      statusText.textContent = "canlı";
+      statusText.textContent = dict.live;
       configNote.style.display = "none";
     } else {
       statusDot.classList.remove("live");
-      statusText.textContent = "demo rejimi";
+      statusText.textContent = dict.demo;
       configNote.style.display = "block";
     }
   }
@@ -33,7 +104,7 @@
 
     const label = document.createElement("div");
     label.className = "label";
-    label.textContent = role === "user" ? "SİZ" : "INDUSTRCONS AI";
+    label.textContent = role === "user" ? (currentLang === "en" ? "YOU" : "SİZ") : "INDUSTRCONS AI";
 
     const bubble = document.createElement("div");
     bubble.className = "bubble";
@@ -53,7 +124,13 @@
 
     const link = document.createElement("a");
     link.href = action.url;
-    link.textContent = "→ " + moduleLabel(action.module) + " açılsın";
+    if (action.url.startsWith("http")) {
+      link.target = "_blank";
+      link.rel = "noopener";
+    }
+    const openText = currentLang === "en" ? "Open " : "";
+    const azText = currentLang === "en" ? "→ " + openText + moduleLabel(action.module) : "→ " + moduleLabel(action.module) + " açılsın";
+    link.textContent = azText;
     link.style.color = "#E8622C";
     link.style.fontWeight = "600";
     link.style.textDecoration = "none";
@@ -87,7 +164,8 @@
     const typingWrap = document.createElement("div");
     typingWrap.className = "msg bot";
     typingWrap.id = "typingIndicator";
-    typingWrap.innerHTML = '<div class="label">INDUSTRCONS AI</div><div class="bubble">yazır...</div>';
+    const typingText = currentLang === "en" ? "typing..." : "yazır...";
+    typingWrap.innerHTML = '<div class="label">INDUSTRCONS AI</div><div class="bubble">' + typingText + '</div>';
     chatLog.appendChild(typingWrap);
     chatLog.scrollTop = chatLog.scrollHeight;
 
@@ -109,9 +187,9 @@
     btn.addEventListener("click", () => {
       document.querySelectorAll(".lang-switch button").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      currentLang = btn.dataset.lang;
+      applyLanguage(btn.dataset.lang);
     });
   });
 
-  setStatus();
+  applyLanguage("az");
 })();
