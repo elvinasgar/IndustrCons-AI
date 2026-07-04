@@ -3,38 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IndustrCons Jobs — IndustrCons AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>IndustrCons AI — Construction Copilot</title>
+<meta name="description" content="IndustrCons AI — tikinti mühəndisləri üçün süni intellekt köməkçisi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{ --navy:#0F1B2D; --panel:#16263F; --panel-line:#26405F; --steel:#8A96A3; --paper:#EAEEF2; --orange:#E8622C; }
+  :root{
+    --navy: #0F1B2D;
+    --panel: #16263F;
+    --panel-line: #26405F;
+    --steel: #8A96A3;
+    --paper: #EAEEF2;
+    --orange: #E8622C;
+    --yellow: #F2B441;
+    --radius: 3px;
+  }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{ background:var(--navy); color:var(--paper); font-family:'Inter',sans-serif; min-height:100vh; }
-  .wrap{ max-width:720px; margin:0 auto; padding:60px 24px; text-align:center; }
-  .idx{ font-family:'JetBrains Mono',monospace; color:var(--orange); letter-spacing:2px; font-size:12px; }
-  h1{ font-family:'Space Grotesk',sans-serif; font-size:32px; margin:14px 0 12px; }
-  p{ color:var(--steel); line-height:1.6; margin-bottom:28px; }
-  .card{ border:1px solid var(--panel-line); background:var(--panel); border-radius:3px; padding:22px; text-align:left; margin-bottom:14px; }
-  .card h3{ font-family:'Space Grotesk',sans-serif; font-size:16px; margin-bottom:6px; }
-  .card p{ margin:0; font-size:13.5px; }
-  a.back{ display:inline-block; margin-top:20px; color:var(--orange); text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:13px; }
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    background-image:
+      linear-gradient(rgba(234,238,242,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(234,238,242,0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  a{color:inherit;}
+
+  /* ---- Header ---- */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 28px;
+    border-bottom:1px solid var(--panel-line);
+    background:linear-gradient(180deg, rgba(15,27,45,0.95), rgba(15,27,45,0.85));
+    position:sticky; top:0; z-index:10;
+    backdrop-filter: blur(6px);
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{
+    width:34px; height:34px;
+    border:2px solid var(--orange);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700; font-size:14px; color:var(--orange);
+    transform:rotate(45deg);
+    flex-shrink:0;
+  }
+  .brand-mark span{transform:rotate(-45deg);}
+  .brand-name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:19px; letter-spacing:0.2px;
+  }
+  .brand-name em{color:var(--orange); font-style:normal;}
+  .tagline{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; color:var(--steel); letter-spacing:0.5px;
+    display:none;
+  }
+  @media(min-width:720px){ .tagline{display:block;} }
+
+  .lang-switch{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--steel);
+    display:flex; gap:10px;
+  }
+  .lang-switch button{
+    background:none; border:1px solid var(--panel-line);
+    color:var(--steel); padding:4px 9px; border-radius:var(--radius);
+    cursor:pointer; font-family:inherit; font-size:11px;
+  }
+  .lang-switch button.active{ color:var(--orange); border-color:var(--orange); }
+
+  /* ---- Hero ---- */
+  .hero{
+    max-width:920px; margin:0 auto;
+    padding:52px 24px 28px;
+    text-align:center;
+  }
+  .hero .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--orange); letter-spacing:2px;
+    text-transform:uppercase; margin-bottom:14px;
+  }
+  .hero h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(28px, 5vw, 44px);
+    line-height:1.15; font-weight:700;
+    margin-bottom:16px;
+  }
+  .hero p{
+    color:var(--steel); font-size:16px; max-width:620px; margin:0 auto;
+    line-height:1.6;
+  }
+
+  /* ---- Module grid ---- */
+  .modules{
+    max-width:920px; margin:0 auto; padding:8px 24px 40px;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:14px;
+  }
+  .module-card{
+    border:1px solid var(--panel-line);
+    background:var(--panel);
+    border-radius:var(--radius);
+    padding:18px 16px;
+    text-decoration:none; color:var(--paper);
+    display:flex; flex-direction:column; gap:8px;
+    transition:border-color .15s ease, transform .15s ease;
+    position:relative;
+  }
+  .module-card:hover{ border-color:var(--orange); transform:translateY(-2px); }
+  .module-card .idx{
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--steel);
+  }
+  .module-card h3{
+    font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:600;
+  }
+  .module-card p{ font-size:13px; color:var(--steel); line-height:1.5; }
+  .module-card .go{
+    margin-top:auto; font-family:'JetBrains Mono', monospace; font-size:11px;
+    color:var(--orange); letter-spacing:0.5px;
+  }
+
+  /* ---- Chat shell ---- */
+  .chat-wrap{
+    max-width:760px; margin:0 auto 60px; padding:0 24px;
+  }
+  .chat-frame{
+    border:1px solid var(--panel-line);
+    background:var(--panel);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .chat-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 16px; border-bottom:1px solid var(--panel-line);
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--steel);
+  }
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--yellow); display:inline-block; margin-right:6px;}
+  .dot.live{background:#4CAF6D;}
+
+  .chat-log{
+    min-height:280px; max-height:420px; overflow-y:auto;
+    padding:18px 16px; display:flex; flex-direction:column; gap:14px;
+  }
+  .msg{ max-width:88%; font-size:14.5px; line-height:1.55; }
+  .msg.bot{ align-self:flex-start; }
+  .msg.user{ align-self:flex-end; }
+  .msg .bubble{
+    padding:10px 13px; border-radius:var(--radius);
+  }
+  .msg.bot .bubble{ background:#0F1B2D; border:1px solid var(--panel-line); }
+  .msg.user .bubble{ background:var(--orange); color:#1A0D06; font-weight:500; }
+  .msg .label{
+    font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--steel);
+    margin-bottom:4px; letter-spacing:0.5px;
+  }
+
+  .chat-input{
+    display:flex; gap:8px; padding:12px 14px;
+    border-top:1px solid var(--panel-line);
+  }
+  .chat-input input{
+    flex:1; background:#0F1B2D; border:1px solid var(--panel-line);
+    color:var(--paper); padding:11px 12px; border-radius:var(--radius);
+    font-family:'Inter',sans-serif; font-size:14px;
+  }
+  .chat-input input:focus{ outline:2px solid var(--orange); outline-offset:1px; border-color:transparent; }
+  .chat-input button{
+    background:var(--orange); border:none; color:#1A0D06;
+    font-weight:600; padding:0 18px; border-radius:var(--radius);
+    cursor:pointer; font-family:'Space Grotesk', sans-serif; font-size:14px;
+  }
+  .chat-input button:disabled{ opacity:0.5; cursor:not-allowed; }
+
+  .config-note{
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--steel);
+    padding:10px 16px; border-top:1px solid var(--panel-line); line-height:1.6;
+  }
+  .config-note code{ color:var(--yellow); }
+
+  footer{
+    text-align:center; padding:24px; color:var(--steel);
+    font-size:12.5px; border-top:1px solid var(--panel-line);
+  }
+  footer a{ color:var(--orange); text-decoration:none; }
+  footer a:hover{ text-decoration:underline; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="idx">JOBS MODULE</div>
-    <h1>IndustrCons Jobs</h1>
-    <p>Sahə mühəndisi və digər tikinti vakansiyaları bu modulda yerləşəcək. Hazırda MVP mərhələsindəyik.</p>
 
-    <div class="card">
-      <h3>Planlaşdırılan: Vakansiya Siyahısı</h3>
-      <p>Rol, şəhər və təcrübə səviyyəsinə görə filtrlənə bilən aktual elanlar.</p>
+<header>
+  <div class="brand">
+    <div class="brand-mark"><span>IC</span></div>
+    <div>
+      <div class="brand-name">Industr<em>Cons</em> AI</div>
     </div>
-    <div class="card">
-      <h3>Planlaşdırılan: Chat-dən Filtrli Axtarış</h3>
-      <p>"Bakıda Site Engineer vakansiyası" desəniz, filtr avtomatik tətbiq olunacaq.</p>
-    </div>
-
-    <a class="back" href="../../index.html">← Söhbətə qayıt</a>
   </div>
+  <div class="tagline">TIKINTI ÜÇÜN SÜNİ İNTELLEKT KÖMƏKÇİSİ</div>
+  <div class="lang-switch">
+    <button class="active" data-lang="az">AZ</button>
+    <button data-lang="en">EN</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Construction Copilot</div>
+  <h1 data-i18n="hero_title">Sahədə lazım olanı saniyələr içində tap.</h1>
+  <p data-i18n="hero_sub">NCR, QA/QC şablonları, xərc hesablamaları, iş elanları və təlimlər — hamısı bir yerdə. Aşağıda yazın, IndustrCons AI sizi düzgün alətə yönləndirəcək.</p>
+</section>
+
+<div class="modules">
+  <a class="module-card" href="modules/docs/" data-module="docs">
+    <span class="idx">DOC</span>
+    <h3 data-i18n="mod_docs_title">IndustrCons Docs</h3>
+    <p data-i18n="mod_docs_sub">NCR, Risk Assessment, Slump Test və digər formalar. PDF ixracı ilə.</p>
+    <span class="go">AÇ →</span>
+  </a>
+  <a class="module-card" href="modules/cost-estimator/" data-module="estimator">
+    <span class="idx">EST</span>
+    <h3 data-i18n="mod_est_title">Cost Estimator</h3>
+    <p data-i18n="mod_est_sub">Beton, material və əmək xərclərini avtomatik hesabla.</p>
+    <span class="go">AÇ →</span>
+  </a>
+  <a class="module-card" href="modules/jobs/" data-module="jobs">
+    <span class="idx">JOB</span>
+    <h3 data-i18n="mod_jobs_title">IndustrCons Jobs</h3>
+    <p data-i18n="mod_jobs_sub">Sahə mühəndisi və digər tikinti vakansiyaları.</p>
+    <span class="go">AÇ →</span>
+  </a>
+  <a class="module-card" href="modules/academy/" data-module="academy">
+    <span class="idx">EDU</span>
+    <h3 data-i18n="mod_academy_title">IndustrCons Academy</h3>
+    <p data-i18n="mod_academy_sub">Primavera, AutoCAD, QA/QC və layihə idarəçiliyi kursları.</p>
+    <span class="go">AÇ →</span>
+  </a>
+</div>
+
+<div class="chat-wrap">
+  <div class="chat-frame">
+    <div class="chat-head">
+      <span><span class="dot" id="statusDot"></span><span id="statusText">qoşulur...</span></span>
+      <span>v0.1 · MVP</span>
+    </div>
+    <div class="chat-log" id="chatLog">
+      <div class="msg bot">
+        <div class="label">INDUSTRCONS AI</div>
+        <div class="bubble">Salam 👋 Mən IndustrCons AI-yam. Sahədə nə lazımdır? Məsələn: "Sabah beton tökəcəyik" və ya "NCR lazımdır".</div>
+      </div>
+    </div>
+    <form class="chat-input" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Sualınızı yazın..." autocomplete="off" required>
+      <button type="submit" id="sendBtn">Göndər</button>
+    </form>
+    <div class="config-note" id="configNote">
+      ⚙ Backend qoşulmayıb. <code>js/api-client.js</code> içində <code>GATEWAY_URL</code> dəyərini öz Cloudflare Worker ünvanınızla əvəz edin.
+    </div>
+  </div>
+</div>
+
+<footer>
+  IndustrCons AI — <a href="#" id="whatsappLink">WhatsApp Community-ə qoşul</a> · <a href="https://github.com/" id="repoLink">GitHub</a>
+</footer>
+
+<script src="js/api-client.js"></script>
+<script src="js/chat-ui.js"></script>
 </body>
 </html>
