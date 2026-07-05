@@ -8,9 +8,6 @@
   const chatForm = document.getElementById("chatForm");
   const chatInput = document.getElementById("chatInput");
   const sendBtn = document.getElementById("sendBtn");
-  const statusDot = document.getElementById("statusDot");
-  const statusText = document.getElementById("statusText");
-  const configNote = document.getElementById("configNote");
 
   let currentLang = "az";
   let history = [];
@@ -21,55 +18,37 @@
       tagline: "TIKINTI ÜÇÜN SÜNİ İNTELLEKT KÖMƏKÇİSİ",
       eyebrow: "Construction Copilot",
       hero_title: "Sahədə lazım olanı saniyələr içində tap.",
-      hero_sub: "NCR, QA/QC şablonları, xərc hesablamaları, iş elanları və təlimlər — hamısı bir yerdə. Aşağıda yazın, IndustrCons AI sizi düzgün alətə yönləndirəcək. Knowledge Center və bənzəri yeni modullar tezliklə əlavə olunacaq.",
+      hero_sub: "NCR, QA/QC şablonları, xərc hesablamaları və bilik mərkəzi — hamısı bir yerdə. Aşağıda yazın, IndustrCons AI sizi düzgün alətə yönləndirəcək.",
       mod_docs_title: "IndustrCons Docs",
       mod_docs_sub: "NCR, Risk Assessment, Slump Test və digər formalar. PDF ixracı ilə.",
       mod_est_title: "Cost Estimator",
       mod_est_sub: "Beton, material və əmək xərclərini avtomatik hesabla.",
-      mod_jobs_title: "IndustrCons Jobs",
-      mod_jobs_sub: "Sahə mühəndisi və digər tikinti vakansiyaları.",
-      mod_academy_title: "IndustrCons Academy",
-      mod_academy_sub: "Primavera, AutoCAD, QA/QC və layihə idarəçiliyi kursları.",
       mod_kc_title: "Knowledge Center",
-      mod_kc_sub: "Tikinti biliyi, standartlar və bələdçilər — tezliklə.",
+      mod_kc_sub: "Tikinti biliyi, standartlar və bələdçilər.",
       go: "AÇ →",
-      soon: "TEZLİKLƏ",
-      connecting: "qoşulur...",
       welcome: 'Salam 👋 Mən IndustrCons AI-yam. Sahədə nə lazımdır? Məsələn: "Sabah beton tökəcəyik" və ya "NCR lazımdır".',
       send: "Göndər",
-      config_note: '⚙ Backend qoşulmayıb. <code>js/api-client.js</code> içində <code>GATEWAY_URL</code> dəyərini öz Cloudflare Worker ünvanınızla əvəz edin.',
       whatsapp_link: "WhatsApp Community-ə qoşul",
       contact_label: "Əlaqə",
-      placeholder: "Sualınızı yazın...",
-      live: "canlı",
-      demo: "demo rejimi"
+      placeholder: "Sualınızı yazın..."
     },
     en: {
       tagline: "AI COPILOT FOR CONSTRUCTION",
       eyebrow: "Construction Copilot",
       hero_title: "Find what you need on-site in seconds.",
-      hero_sub: "NCR, QA/QC templates, cost calculations, job listings and training — all in one place. Type below and IndustrCons AI will route you to the right tool. Knowledge Center and more modules are coming soon.",
+      hero_sub: "NCR, QA/QC templates, cost calculations and a knowledge center — all in one place. Type below and IndustrCons AI will route you to the right tool.",
       mod_docs_title: "IndustrCons Docs",
       mod_docs_sub: "NCR, Risk Assessment, Slump Test and other forms, with PDF export.",
       mod_est_title: "Cost Estimator",
       mod_est_sub: "Automatically calculate concrete, material and labor costs.",
-      mod_jobs_title: "IndustrCons Jobs",
-      mod_jobs_sub: "Site Engineer and other construction job listings.",
-      mod_academy_title: "IndustrCons Academy",
-      mod_academy_sub: "Primavera, AutoCAD, QA/QC and project management courses.",
       mod_kc_title: "Knowledge Center",
-      mod_kc_sub: "Construction knowledge, standards and guides — coming soon.",
+      mod_kc_sub: "Construction knowledge, standards and guides.",
       go: "OPEN →",
-      soon: "COMING SOON",
-      connecting: "connecting...",
       welcome: 'Hi 👋 I\'m IndustrCons AI. What do you need on site? For example: "We\'re pouring concrete tomorrow" or "I need an NCR".',
       send: "Send",
-      config_note: '⚙ Backend not connected. In <code>js/api-client.js</code>, replace <code>GATEWAY_URL</code> with your Cloudflare Worker address.',
       whatsapp_link: "Join the WhatsApp Community",
       contact_label: "Contact",
-      placeholder: "Type your question...",
-      live: "live",
-      demo: "demo mode"
+      placeholder: "Type your question..."
     }
   };
 
@@ -82,20 +61,6 @@
     });
     document.documentElement.lang = lang;
     chatInput.placeholder = dict.placeholder;
-    setStatus();
-  }
-
-  function setStatus() {
-    const dict = I18N[currentLang];
-    if (IndustrConsAPI.connected) {
-      statusDot.classList.add("live");
-      statusText.textContent = dict.live;
-      configNote.style.display = "none";
-    } else {
-      statusDot.classList.remove("live");
-      statusText.textContent = dict.demo;
-      configNote.style.display = "block";
-    }
   }
 
   function appendMessage(role, text) {
@@ -145,8 +110,7 @@
     const labels = {
       "docs": "IndustrCons Docs",
       "cost-estimator": "Cost Estimator",
-      "jobs": "IndustrCons Jobs",
-      "academy": "IndustrCons Academy"
+      "knowledge": "Knowledge Center"
     };
     return labels[mod] || mod;
   }
