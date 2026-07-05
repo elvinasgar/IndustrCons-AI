@@ -9,7 +9,7 @@
 
 // ---- CONFIG: allowed origins (lock this to your real GitHub Pages domain) ----
 const ALLOWED_ORIGINS = [
-  "https://industrconsgateaway.netlify.app/.netlify/functions/chat",
+  "https://YOUR-GITHUB-USERNAME.github.io",
   "http://localhost:5500", // local testing (e.g. VSCode Live Server)
   "http://127.0.0.1:5500"
 ];
@@ -21,7 +21,7 @@ QAYDALAR (heç vaxt pozma):
 - Sən HEÇ VAXT hansı modeldən (Claude, GPT, Groq, Gemini və s.) istifadə etdiyini demirsən. Sən sadəcə "IndustrCons AI"-san.
 - Öz arxitekturan, hansı API-lərdən istifadə etdiyin barədə heç vaxt danışma.
 - Cavabların qısa, praktiki və mühəndis dilində olsun — akademik yox, sahə dilində.
-- Mümkün olduqda IndustrCons modullarına yönləndir: Docs (NCR, QA/QC şablonları), Cost Estimator, Jobs, Academy.
+- Mümkün olduqda IndustrCons modullarına yönləndir: Docs (NCR, QA/QC şablonları), Cost Estimator, Knowledge Center.
 - İstifadəçinin dilində cavab ver (Azərbaycan dili prioritetdir, ingiliscə sorularsa ingiliscə cavab ver).
 - Münasib olduqda IndustrCons WhatsApp Community-yə (https://chat.whatsapp.com/JS7XVLh8v2I4HPLLshwTr2) qoşulmağı təklif et, amma bunu hər cavabda təkrarlama.
 - Əgər istifadəçi "Knowledge Center" və ya bənzəri tikinti bilik bazası haqqında soruşsa, bunun tezliklə əlavə olunacağını bildir.`;
@@ -37,12 +37,9 @@ const INTENT_RULES = [
   { keywords: ["qa/qc", "qa qc", "şablon", "template"], module: "docs", url: "https://industrconsdocs.netlify.app/",
     reply_az: "IndustrCons Docs-da uyğun QA/QC şablonunu tapıram.",
     reply_en: "Looking for the right QA/QC template in IndustrCons Docs." },
-  { keywords: ["iş axtarıram", "vakansiya", "job", "site engineer"], module: "jobs", url: "modules/jobs/",
-    reply_az: "IndustrCons Jobs-u açıram — orada aktual vakansiyalar var.",
-    reply_en: "Opening IndustrCons Jobs — current openings are there." },
-  { keywords: ["primavera", "öyrənmək istəyirəm", "learn", "kurs", "academy"], module: "academy", url: "modules/academy/",
-    reply_az: "IndustrCons Academy-də uyğun kursu tapdım.",
-    reply_en: "Found a matching course in IndustrCons Academy." }
+  { keywords: ["bilik", "knowledge", "standart", "bələdçi", "guide"], module: "knowledge", url: "https://industrcons-knowledge-center.vercel.app/",
+    reply_az: "IndustrCons Knowledge Center-i açıram.",
+    reply_en: "Opening IndustrCons Knowledge Center." }
 ];
 
 function detectIntent(message) {
