@@ -10,7 +10,7 @@
 //   https://YOUR-SITE-NAME.netlify.app/.netlify/functions/chat
 // Cloudflare Workers look like:
 //   https://industrcons-gateway.<your-subdomain>.workers.dev/v1/chat
-const GATEWAY_URL = "https://long-king-498d.elvinasgarov12.workers.dev/";
+const GATEWAY_URL = "https://long-king-498d.elvinasgarov12.workers.dev/v1/chat";
 
 const IndustrConsAPI = {
   connected: GATEWAY_URL.indexOf("REPLACE-ME") === -1,
