@@ -126,9 +126,6 @@
     margin-top:auto; font-family:'JetBrains Mono', monospace; font-size:11px;
     color:var(--orange); letter-spacing:0.5px;
   }
-  .module-card.soon{ opacity:0.6; cursor:default; }
-  .module-card.soon:hover{ border-color:var(--panel-line); transform:none; }
-  .module-card .soon-tag{ color:var(--yellow); }
 
   /* ---- Chat shell ---- */
   .chat-wrap{
@@ -140,13 +137,6 @@
     border-radius:var(--radius);
     overflow:hidden;
   }
-  .chat-head{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:12px 16px; border-bottom:1px solid var(--panel-line);
-    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--steel);
-  }
-  .dot{width:7px; height:7px; border-radius:50%; background:var(--yellow); display:inline-block; margin-right:6px;}
-  .dot.live{background:#4CAF6D;}
 
   .chat-log{
     min-height:280px; max-height:420px; overflow-y:auto;
@@ -181,12 +171,6 @@
     cursor:pointer; font-family:'Space Grotesk', sans-serif; font-size:14px;
   }
   .chat-input button:disabled{ opacity:0.5; cursor:not-allowed; }
-
-  .config-note{
-    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--steel);
-    padding:10px 16px; border-top:1px solid var(--panel-line); line-height:1.6;
-  }
-  .config-note code{ color:var(--yellow); }
 
   footer{
     text-align:center; padding:24px; color:var(--steel);
@@ -235,32 +219,16 @@
     <p data-i18n="mod_est_sub">Beton, material və əmək xərclərini avtomatik hesabla.</p>
     <span class="go" data-i18n="go">AÇ →</span>
   </a>
-  <a class="module-card" href="modules/jobs/" data-module="jobs">
-    <span class="idx">JOB</span>
-    <h3 data-i18n="mod_jobs_title">IndustrCons Jobs</h3>
-    <p data-i18n="mod_jobs_sub">Sahə mühəndisi və digər tikinti vakansiyaları.</p>
-    <span class="go" data-i18n="go">AÇ →</span>
-  </a>
-  <a class="module-card" href="modules/academy/" data-module="academy">
-    <span class="idx">EDU</span>
-    <h3 data-i18n="mod_academy_title">IndustrCons Academy</h3>
-    <p data-i18n="mod_academy_sub">Primavera, AutoCAD, QA/QC və layihə idarəçiliyi kursları.</p>
-    <span class="go" data-i18n="go">AÇ →</span>
-  </a>
-  <div class="module-card soon" data-module="knowledge">
+  <a class="module-card" href="https://industrcons-knowledge-center.vercel.app/" target="_blank" rel="noopener" data-module="knowledge">
     <span class="idx">KC</span>
     <h3 data-i18n="mod_kc_title">Knowledge Center</h3>
-    <p data-i18n="mod_kc_sub">Tikinti biliyi, standartlar və bələdçilər — tezliklə.</p>
-    <span class="go soon-tag" data-i18n="soon">TEZLİKLƏ</span>
-  </div>
+    <p data-i18n="mod_kc_sub">Tikinti biliyi, standartlar və bələdçilər.</p>
+    <span class="go" data-i18n="go">AÇ →</span>
+  </a>
 </div>
 
 <div class="chat-wrap">
   <div class="chat-frame">
-    <div class="chat-head">
-      <span><span class="dot" id="statusDot"></span><span id="statusText" data-i18n="connecting">qoşulur...</span></span>
-      <span>v0.1 · MVP</span>
-    </div>
     <div class="chat-log" id="chatLog">
       <div class="msg bot">
         <div class="label">INDUSTRCONS AI</div>
@@ -271,9 +239,6 @@
       <input type="text" id="chatInput" placeholder="Sualınızı yazın..." autocomplete="off" required>
       <button type="submit" id="sendBtn" data-i18n="send">Göndər</button>
     </form>
-    <div class="config-note" id="configNote" data-i18n="config_note">
-      ⚙ Backend qoşulmayıb. <code>js/api-client.js</code> içində <code>GATEWAY_URL</code> dəyərini öz Cloudflare Worker ünvanınızla əvəz edin.
-    </div>
   </div>
 </div>
 
