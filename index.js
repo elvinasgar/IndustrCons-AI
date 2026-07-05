@@ -9,8 +9,8 @@
 
 // ---- CONFIG: allowed origins (lock this to your real GitHub Pages domain) ----
 const ALLOWED_ORIGINS = [
-  "https://YOUR-GITHUB-USERNAME.github.io",
-  "http://localhost:5500", // local testing (e.g. VSCode Live Server)
+  "https://elvinasgar.github.io",
+  "http://localhost:5500",
   "http://127.0.0.1:5500"
 ];
 
