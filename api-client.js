@@ -4,10 +4,13 @@
  * Groq/Gemini directly from the browser — that would expose your API keys.
  */
 
-// 👉 STEP 1: After you deploy the Worker (see gateway/README section),
-// paste its URL here. It will look like:
-// https://industrcons-gateway.<your-subdomain>.workers.dev/v1/chat
-const GATEWAY_URL = "https://industrconsgateaway.netlify.app/.netlify/functions/chat";
+// 👉 STEP 1: After you deploy the Gateway (Netlify Function or Cloudflare
+// Worker — see README), paste its URL here.
+// Netlify Functions look like:
+//   https://YOUR-SITE-NAME.netlify.app/.netlify/functions/chat
+// Cloudflare Workers look like:
+//   https://industrcons-gateway.<your-subdomain>.workers.dev/v1/chat
+const GATEWAY_URL = "https://REPLACE-ME.workers.dev/v1/chat";
 
 const IndustrConsAPI = {
   connected: GATEWAY_URL.indexOf("REPLACE-ME") === -1,
@@ -81,20 +84,12 @@ const IndustrConsAPI = {
         action: { module: "docs", url: "https://industrconsdocs.netlify.app/" }
       };
     }
-    if (m.includes("iş") || m.includes("job") || m.includes("vakansiya")) {
+    if (m.includes("bilik") || m.includes("knowledge") || m.includes("standart") || m.includes("bələdçi") || m.includes("guide")) {
       return {
         reply: az
-          ? "IndustrCons Jobs-u açıram — orada aktual vakansiyalar var."
-          : "Opening IndustrCons Jobs — current openings are there.",
-        action: { module: "jobs", url: "modules/jobs/" }
-      };
-    }
-    if (m.includes("primavera") || m.includes("öyrən") || m.includes("learn") || m.includes("kurs")) {
-      return {
-        reply: az
-          ? "IndustrCons Academy-də uyğun kursu tapdım."
-          : "Found a matching course in IndustrCons Academy.",
-        action: { module: "academy", url: "modules/academy/" }
+          ? "IndustrCons Knowledge Center-i açıram."
+          : "Opening IndustrCons Knowledge Center.",
+        action: { module: "knowledge", url: "https://industrcons-knowledge-center.vercel.app/" }
       };
     }
     return {
