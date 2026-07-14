@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elvinasgar.github.io/industrcons.github.io/sitemap.xml
