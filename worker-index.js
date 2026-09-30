@@ -93,7 +93,7 @@ async function callGroq(env, message, history, lang) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: "llama-3.3-70b-versatile", // check console.groq.com for current model names
+      model: "openai/gpt-oss-120b", // llama-3.3-70b-versatile was decommissioned Aug 16, 2026
       messages,
       temperature: 0.4,
       max_tokens: 500
