@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="az" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IndustrCons — Industry Ready Engineer</title>
+<meta name="description" content="IndustrCons — tikinti və mühəndislik sahəsində peşəkarları birləşdirən icma, vakansiya, virtual təcrübə, karyera yol xəritəsi və rəqəmsal alətlər platforması.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181C;
+    --concrete:#EEEAE2;
+    --steel:#33424E;
+    --signal:#E8590C;
+    --rebar:#7C7568;
+    --card:#FFFFFF;
+    --line:#DAD4C8;
+    --blue:#1F5C99;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--concrete);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  button{font-family:inherit;cursor:pointer;}
+
+  header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(238,234,226,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo img{height:38px;width:auto;display:block;}
+  .nav-links{display:flex;gap:24px;font-size:0.9rem;font-weight:500;flex-wrap:wrap;}
+  .nav-links a{opacity:0.75;transition:opacity .2s;white-space:nowrap;}
+  .nav-links a:hover{opacity:1;}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+
+  .lang-switch{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+  .lang-switch button{
+    background:transparent;border:none;padding:8px 11px;font-size:0.78rem;font-weight:700;
+    color:var(--rebar);font-family:'IBM Plex Mono',monospace;
+  }
+  .lang-switch button.active{background:var(--ink);color:#fff;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;border-radius:8px;font-weight:600;font-size:0.9rem;
+    transition:transform .15s ease, box-shadow .15s ease;
+    border:1px solid transparent;white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--signal);color:#fff;}
+  .btn-primary:hover{box-shadow:0 6px 18px rgba(232,89,12,0.35);}
+  .btn-ghost{border-color:var(--ink);color:var(--ink);}
+  .btn-dark{background:var(--ink);color:#fff;}
+  .btn-sm{padding:8px 14px;font-size:0.82rem;}
+
+  .hero{
+    position:relative;overflow:hidden;
+    padding:88px 0 64px;
+    background-image:
+      linear-gradient(rgba(20,24,28,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,24,28,0.04) 1px, transparent 1px);
+    background-size:40px 40px;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--steel);background:var(--card);border:1px solid var(--line);
+    padding:6px 12px;border-radius:20px;margin-bottom:24px;
+  }
+  .eyebrow::before{content:"●";color:var(--signal);}
+  .hero h1{
+    font-size:clamp(2.1rem, 5vw, 3.5rem);
+    font-weight:700;max-width:820px;
+    line-height:1.1;
+  }
+  .hero h1 span{color:var(--signal);}
+  .hero p{max-width:620px;margin-top:22px;font-size:1.06rem;color:var(--steel);}
+  .hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
+  .stat-row{display:flex;gap:44px;margin-top:56px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px;}
+  .stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.7rem;}
+  .stat span{font-size:0.83rem;color:var(--rebar);}
+
+  section{padding:76px 0;}
+  .section-head{max-width:660px;margin-bottom:40px;}
+  .section-head .tag{font-family:'IBM Plex Mono',monospace;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--signal);font-weight:600;}
+  .section-head h2{font-size:clamp(1.55rem,3vw,2.1rem);margin-top:8px;}
+  .section-head p{color:var(--steel);margin-top:12px;}
+
+  .tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .tools-grid-3{grid-template-columns:repeat(3,1fr);}
+  @media (max-width:1000px){ .tools-grid-3{grid-template-columns:1fr 1fr;} }
+  .tool-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s, transform .2s;}
+  .tool-card:hover{border-color:var(--ink);transform:translateY(-3px);}
+  .tool-tag{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:#fff;background:var(--steel);padding:4px 10px;border-radius:5px;width:fit-content;}
+  .tool-card h3{font-size:1.3rem;}
+  .tool-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:2px;}
+  .tool-card li{font-size:0.9rem;color:var(--steel);padding-left:16px;position:relative;}
+  .tool-card li::before{content:"—";position:absolute;left:0;color:var(--signal);}
+  .tool-card .btn{margin-top:6px;align-self:flex-start;}
+
+  /* Ecosystem grid (5 external platforms) */
+  .eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .eco-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:10px;transition:transform .2s, border-color .2s;}
+  .eco-card:hover{transform:translateY(-3px);border-color:var(--blue);}
+  .eco-card .icon{font-size:1.6rem;}
+  .eco-card h4{font-size:1.02rem;}
+  .eco-card p{font-size:0.86rem;color:var(--rebar);flex-grow:1;}
+  .eco-card a.go{font-size:0.85rem;font-weight:700;color:var(--blue);}
+  .badge-soon{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.05em;color:#fff;background:var(--rebar);padding:2px 8px;border-radius:10px;width:fit-content;}
+
+  .groups-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .group-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:10px;}
+  .group-card .icon{font-size:1.5rem;}
+  .group-card h4{font-size:1rem;}
+  .group-card p{font-size:0.85rem;color:var(--rebar);flex-grow:1;}
+  .group-card a{font-size:0.85rem;font-weight:600;color:var(--signal);}
+  .group-card.new{border-color:var(--signal);position:relative;}
+  .group-card.new::after{content:attr(data-newlabel);position:absolute;top:14px;right:14px;font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--signal);letter-spacing:0.05em;}
+
+  .channels-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
+  .channel-chip{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;font-weight:600;font-size:0.9rem;transition:all .2s;}
+  .channel-chip:hover{border-color:var(--ink);background:var(--ink);color:#fff;}
+
+  /* Internship */
+  .internship{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .intern-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start;}
+  .intern-facts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+  .fact{border-top:2px solid var(--blue);padding-top:10px;}
+  .fact b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.3rem;}
+  .fact span{font-size:0.82rem;color:var(--rebar);}
+  .steps{display:flex;flex-direction:column;gap:14px;margin-top:22px;}
+  .step{display:flex;gap:14px;align-items:flex-start;}
+  .step .num{font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--signal);min-width:26px;}
+  .step h5{font-size:0.95rem;margin-bottom:2px;}
+  .step p{font-size:0.85rem;color:var(--rebar);}
+  .soon-card{background:var(--concrete);border:1px dashed var(--rebar);border-radius:12px;padding:22px;margin-top:20px;}
+  .soon-card h5{font-size:0.95rem;margin-bottom:8px;}
+  .soon-card ul{padding-left:18px;font-size:0.86rem;color:var(--steel);display:flex;flex-direction:column;gap:4px;}
+  .cv-service{background:var(--ink);color:#fff;border-radius:12px;padding:24px;margin-top:20px;}
+  .cv-service h5{font-size:1rem;margin-bottom:6px;}
+  .cv-service p{font-size:0.86rem;color:#C6CDD2;margin-bottom:12px;}
+
+  /* Roadmap — pure CSS tabs + native <details> accordion (works with zero JavaScript) */
+  .rm-tabs{position:relative;}
+  .rm-tabs input[type="radio"]{position:absolute;opacity:0;pointer-events:none;}
+  .rm-tablist{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+  .rm-tablist label{
+    font-family:'IBM Plex Mono',monospace;font-size:0.8rem;font-weight:600;
+    padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);
+    cursor:pointer;color:var(--steel);transition:all .2s;user-select:none;
+  }
+  .rm-tablist label:hover{border-color:var(--ink);}
+  .rm-panel{display:none;flex-direction:column;gap:12px;animation:fadeInUp .4s ease both;}
+  #rmtab-pm:checked ~ .rm-tablist label[for="rmtab-pm"],
+  #rmtab-qaqc:checked ~ .rm-tablist label[for="rmtab-qaqc"],
+  #rmtab-hse:checked ~ .rm-tablist label[for="rmtab-hse"],
+  #rmtab-plan:checked ~ .rm-tablist label[for="rmtab-plan"],
+  #rmtab-mep:checked ~ .rm-tablist label[for="rmtab-mep"],
+  #rmtab-est:checked ~ .rm-tablist label[for="rmtab-est"],
+  #rmtab-geo:checked ~ .rm-tablist label[for="rmtab-geo"],
+  #rmtab-proc:checked ~ .rm-tablist label[for="rmtab-proc"],
+  #rmtab-bim:checked ~ .rm-tablist label[for="rmtab-bim"],
+  #rmtab-arch:checked ~ .rm-tablist label[for="rmtab-arch"]{
+    background:var(--ink);color:#fff;border-color:var(--ink);
+  }
+  #rmtab-pm:checked ~ .rm-panels #panel-pm{display:flex;}
+  #rmtab-qaqc:checked ~ .rm-panels #panel-qaqc{display:flex;}
+  #rmtab-hse:checked ~ .rm-panels #panel-hse{display:flex;}
+  #rmtab-plan:checked ~ .rm-panels #panel-plan{display:flex;}
+  #rmtab-mep:checked ~ .rm-panels #panel-mep{display:flex;}
+  #rmtab-est:checked ~ .rm-panels #panel-est{display:flex;}
+  #rmtab-geo:checked ~ .rm-panels #panel-geo{display:flex;}
+  #rmtab-proc:checked ~ .rm-panels #panel-proc{display:flex;}
+  #rmtab-bim:checked ~ .rm-panels #panel-bim{display:flex;}
+  #rmtab-arch:checked ~ .rm-panels #panel-arch{display:flex;}
+  .rm-node{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s;
+  }
+  .rm-node[open]{border-color:var(--signal);}
+  .rm-node summary{
+    list-style:none;cursor:pointer;padding:16px 18px;display:flex;justify-content:space-between;
+    align-items:center;gap:12px;
+  }
+  .rm-node summary::-webkit-details-marker{display:none;}
+  .rm-node-title{display:flex;align-items:center;gap:12px;}
+  .rm-index{font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:var(--blue);background:#EAF1F8;padding:4px 9px;border-radius:6px;font-weight:700;flex-shrink:0;}
+  .rm-node h4{font-size:1rem;}
+  .rm-node-meta{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+  .rm-years{font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:var(--rebar);white-space:nowrap;}
+  .rm-chevron{transition:transform .2s;color:var(--rebar);}
+  .rm-node[open] .rm-chevron{transform:rotate(180deg);}
+  .rm-detail-inner{padding:0 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px;animation:fadeInUp .3s ease both;}
+  .rm-col h6{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--signal);margin-bottom:6px;}
+  .rm-col ul{padding-left:16px;font-size:0.85rem;color:var(--steel);display:flex;flex-direction:column;gap:4px;}
+  .rm-branch-note{margin-top:24px;background:#EAF1F8;border-radius:10px;padding:16px 20px;font-size:0.87rem;color:var(--steel);}
+  .rm-branch-note b{color:var(--blue);}
+
+  /* Mission / Vision / Values */
+  .mvv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .mvv-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px;
+    display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;
+  }
+  .mvv-card::before{
+    content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:var(--signal);
+  }
+  .mvv-card .icon{font-size:1.7rem;}
+  .mvv-card h3{font-size:1.15rem;}
+  .mvv-card p{font-size:0.9rem;color:var(--steel);}
+  .mvv-card ul{padding-left:18px;font-size:0.88rem;color:var(--steel);display:flex;flex-direction:column;gap:6px;}
+  @media (max-width:860px){ .mvv-grid{grid-template-columns:1fr;} }
+
+  /* IC Events */
+  .events-section{
+    background:var(--ink);color:var(--concrete);position:relative;overflow:hidden;
+  }
+  .events-section::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size:36px 36px;pointer-events:none;
+  }
+  .events-section .section-head p{color:#B9C2C9;}
+  .events-section .tag{color:var(--signal);}
+  .events-wrap{position:relative;z-index:1;}
+  .events-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:start;}
+  .events-badges{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 26px;}
+  .events-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:0.76rem;font-weight:600;
+    border:1px solid rgba(255,255,255,0.2);color:#DCE3E8;padding:7px 13px;border-radius:20px;
+  }
+  .events-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px;}
+  .events-card{
+    background:#1E252B;border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px;
+  }
+  .events-card .license-tag{
+    display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;
+    color:#9FD3A8;text-transform:uppercase;letter-spacing:0.05em;
+  }
+  .events-card .license-tag::before{content:"●";}
+  .events-card h4{font-size:1.1rem;}
+  .events-card p{font-size:0.88rem;color:#B9C2C9;}
+  .events-formats{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+  .events-format{display:flex;gap:10px;align-items:flex-start;font-size:0.86rem;color:#DCE3E8;}
+  .events-format b{color:#fff;}
+
+  /* IndustrCons Consulting — futuristic services section */
+  .consulting-section{
+    position:relative;overflow:hidden;color:var(--concrete);
+    background:linear-gradient(160deg, #12161A 0%, #1B242C 55%, #22303A 100%);
+  }
+  .consulting-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:0.35;pointer-events:none;}
+  .consulting-blob.b1{width:340px;height:340px;background:var(--signal);top:-80px;right:-60px;animation:blobFloat1 9s ease-in-out infinite;}
+  .consulting-blob.b2{width:280px;height:280px;background:var(--blue);bottom:-60px;left:-40px;animation:blobFloat2 11s ease-in-out infinite;}
+  .consulting-wrap{position:relative;z-index:1;}
+  .consulting-section .section-head p{color:#B9C2C9;}
+  .consulting-section .tag{color:var(--signal);}
+  .consulting-phase-badge{
+    display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:0.78rem;
+    color:#FFD8BE;border:1px dashed rgba(232,89,12,0.6);padding:8px 14px;border-radius:20px;margin-bottom:22px;
+    animation:dashPulse 2.6s ease-in-out infinite;
+  }
+  .consulting-intro{max-width:680px;color:#C6CDD2;font-size:0.98rem;margin-bottom:8px;}
+  .consulting-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px;}
+  .consulting-card{
+    background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.12);border-radius:16px;
+    padding:24px;backdrop-filter:blur(6px);transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    animation:fadeInUp .5s ease both;
+  }
+  .consulting-card:hover{transform:translateY(-6px);border-color:var(--signal);box-shadow:0 0 34px rgba(232,89,12,0.22);}
+  .consulting-card .icon{font-size:1.7rem;filter:drop-shadow(0 0 6px rgba(232,89,12,0.45));}
+  .consulting-card h4{font-size:1.02rem;margin:10px 0 6px;}
+  .consulting-card p{font-size:0.87rem;color:#B9C2C9;}
+  .consulting-grid .consulting-card:nth-child(2){animation-delay:.05s;}
+  .consulting-grid .consulting-card:nth-child(3){animation-delay:.1s;}
+  .consulting-grid .consulting-card:nth-child(4){animation-delay:.15s;}
+  .consulting-grid .consulting-card:nth-child(5){animation-delay:.2s;}
+  .consulting-grid .consulting-card:nth-child(6){animation-delay:.25s;}
+  .consulting-note{margin-top:28px;font-size:0.86rem;color:#8A9199;max-width:680px;}
+  .consulting-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px;}
+  @media (max-width:860px){ .consulting-grid{grid-template-columns:1fr;} }
+  @media (max-width:1000px) and (min-width:861px){ .consulting-grid{grid-template-columns:1fr 1fr;} }
+  @media (prefers-reduced-motion: reduce){ .consulting-blob, .consulting-phase-badge, .consulting-card{animation:none !important;} }
+
+  /* Motion */
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes pulseDot{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  @keyframes gridDrift{from{background-position:0 0;}to{background-position:40px 40px;}}
+  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  @keyframes blobFloat1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(30px,-20px) scale(1.08);}}
+  @keyframes blobFloat2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-25px,25px) scale(1.05);}}
+  @keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,89,12,0.35);}50%{box-shadow:0 0 0 8px rgba(232,89,12,0);}}
+  @keyframes dashPulse{0%,100%{border-color:rgba(232,89,12,0.35);}50%{border-color:rgba(232,89,12,0.9);}}
+  .hero h1 span{
+    background:linear-gradient(90deg, var(--signal), #ff9256, var(--signal));
+    background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:var(--signal);
+    animation:gradientShift 5s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .hero h1 span{animation:none;} }
+  .hero{animation:gridDrift 6s linear infinite;}
+  .eyebrow::before{animation:pulseDot 1.8s ease-in-out infinite;}
+  .hero h1, .hero p, .hero-cta, .stat-row{animation:fadeInUp .7s ease both;}
+  .hero p{animation-delay:.08s;}
+  .hero-cta{animation-delay:.16s;}
+  .stat-row{animation-delay:.24s;}
+  .tool-card, .eco-card, .group-card{animation:fadeInUp .5s ease both;}
+  .tools-grid .tool-card:nth-child(2){animation-delay:.08s;}
+  .eco-grid .eco-card:nth-child(2){animation-delay:.05s;}
+  .eco-grid .eco-card:nth-child(3){animation-delay:.1s;}
+  .eco-grid .eco-card:nth-child(4){animation-delay:.15s;}
+  .eco-grid .eco-card:nth-child(5){animation-delay:.2s;}
+  .eco-grid .eco-card:nth-child(6){animation-delay:.25s;}
+  .group-card:hover, .tool-card:hover, .eco-card:hover{box-shadow:0 12px 28px rgba(20,24,28,0.1), 0 0 0 1px rgba(232,89,12,0.15);transform:translateY(-4px);}
+  .group-card, .tool-card, .eco-card{transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;}
+  .btn-primary{position:relative;overflow:hidden;}
+  .btn-primary::after{
+    content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform:skewX(-20deg);transition:left .5s ease;
+  }
+  .btn-primary:hover::after{left:130%;}
+  #ai-toggle{animation:pulseDot 2.4s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){
+    .hero, .eyebrow::before, .hero h1, .hero p, .hero-cta, .stat-row, .tool-card, .eco-card, .group-card, #ai-toggle{animation:none !important;}
+  }
+
+  .about{background:var(--ink);color:var(--concrete);}
+  .about .section-head p{color:#B9C2C9;}
+  .about .tag{color:var(--signal);}
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:start;}
+  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .pillar{border-top:2px solid var(--signal);padding-top:12px;}
+  .pillar h4{font-size:1rem;margin-bottom:6px;}
+  .pillar p{font-size:0.88rem;color:#B9C2C9;}
+  .founder-card{background:#1E252B;border-radius:14px;padding:28px;}
+  .founder-card .avatar{width:56px;height:56px;border-radius:50%;background:var(--signal);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:16px;}
+  .founder-card p{font-size:0.9rem;color:#B9C2C9;margin-top:10px;}
+  .founder-contact{display:flex;flex-direction:column;gap:8px;margin-top:18px;font-size:0.88rem;}
+
+  .social-band{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .social-wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding:36px 0;}
+  .social-links{display:flex;gap:14px;flex-wrap:wrap;}
+  .social-links a{display:flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1px solid var(--line);font-weight:600;font-size:0.9rem;transition:all .2s;}
+  .social-links a:hover{border-color:var(--ink);background:var(--ink);color:#fff;}
+
+  footer{padding:44px 0 30px;}
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+  .footer-grid .logo{margin-bottom:10px;}
+  footer p{color:var(--rebar);font-size:0.85rem;}
+  .foot-links{display:flex;gap:22px;font-size:0.85rem;flex-wrap:wrap;}
+
+  /* AI assistant widget */
+  #ai-toggle{
+    position:fixed;bottom:24px;right:24px;z-index:100;
+    width:58px;height:58px;border-radius:50%;background:var(--ink);color:var(--signal);
+    border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;
+    transition:transform .2s;
+  }
+  #ai-toggle:hover{transform:scale(1.06);}
+  #ai-panel{
+    position:fixed;bottom:92px;right:24px;z-index:100;width:340px;max-width:calc(100vw - 32px);
+    background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.25);
+    display:none;flex-direction:column;overflow:hidden;
+  }
+  #ai-panel.open{display:flex;}
+  #ai-head{background:var(--ink);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
+  #ai-head h5{font-size:0.92rem;}
+  #ai-head span{font-size:0.72rem;color:#9FD3A8;display:flex;align-items:center;gap:5px;}
+  #ai-head span::before{content:"●";}
+  #ai-close{background:none;border:none;color:#fff;font-size:1.1rem;opacity:0.7;}
+  #ai-body{padding:14px 16px;max-height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;font-size:0.86rem;background:var(--concrete);}
+  .ai-msg{padding:9px 12px;border-radius:10px;max-width:88%;}
+  .ai-msg.bot{background:#fff;border:1px solid var(--line);align-self:flex-start;}
+  .ai-msg.user{background:var(--signal);color:#fff;align-self:flex-end;}
+  #ai-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px;background:var(--concrete);}
+  .ai-chip{font-size:0.74rem;border:1px solid var(--line);background:#fff;padding:5px 10px;border-radius:14px;color:var(--steel);}
+  #ai-input-row{display:flex;border-top:1px solid var(--line);}
+  #ai-input{flex-grow:1;border:none;padding:12px 14px;font-size:0.86rem;font-family:inherit;background:#fff;}
+  #ai-input:focus{outline:none;}
+  #ai-send{background:var(--signal);color:#fff;border:none;padding:0 18px;font-weight:700;}
+
+  @media (max-width:860px){
+    .tools-grid{grid-template-columns:1fr;}
+    .eco-grid{grid-template-columns:repeat(2,1fr);}
+    .groups-grid{grid-template-columns:repeat(2,1fr);}
+    .about-grid{grid-template-columns:1fr;}
+    .pillars{grid-template-columns:1fr;}
+    .intern-grid{grid-template-columns:1fr;}
+    .rm-detail-inner{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+  @media (max-width:520px){
+    .groups-grid{grid-template-columns:1fr;}
+    .eco-grid{grid-template-columns:1fr;}
+    .intern-facts{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+  a:focus-visible, button:focus-visible{outline:2px solid var(--signal);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><img src="logo.png" alt="IndustrCons logo"></div>
+    <div class="nav-links">
+      <a href="#tools" data-i18n="nav_tools">Alətlər</a>
+      <a href="#ecosystem" data-i18n="nav_eco">Platformalar</a>
+      <a href="#events" data-i18n="nav_events">IC Events</a>
+      <a href="#groups" data-i18n="nav_groups">İcma</a>
+      <a href="#internship" data-i18n="nav_intern">Virtual Təcrübə</a>
+      <a href="#roadmap" data-i18n="nav_roadmap">Karyera Xəritəsi</a>
+      <a href="#consulting" data-i18n="nav_consulting">Consulting</a>
+      <a href="#mission" data-i18n="nav_mission">Missiya</a>
+      <a href="#about" data-i18n="nav_about">Haqqımızda</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="az" class="active">AZ</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ru">RU</button>
+      </div>
+      <a class="btn btn-primary btn-sm" href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="nav_join">Qoşul</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="hero_eyebrow">Azərbaycan · Tikinti &amp; Mühəndislik Şəbəkəsi</span>
+    <h1 data-i18n="hero_title">Tikinti sənayesinin insanlarını və <span>alətlərini</span> bir yerə yığırıq.</h1>
+    <p data-i18n="hero_sub">IndustrCons — mühəndislərin, sahə mütəxəssislərinin və tələbələrin vakansiya paylaşdığı, networking qurduğu icmadır. Estimator, Docs, Workspace, AI, Biliklər Mərkəzi, Oyunlar, Virtual Təcrübə və Mühəndislik Xəritəsi — hamısı bir ekosistemdə.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#ecosystem" data-i18n="hero_cta1">Ekosistemi kəşf et</a>
+      <a class="btn btn-ghost" href="#groups" data-i18n="hero_cta2">İcma qruplarını gör</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b class="mono">9</b><span data-i18n="stat1">rəqəmsal platforma</span></div>
+      <div class="stat"><b class="mono">12+</b><span data-i18n="stat2">ixtisaslaşmış qrup</span></div>
+      <div class="stat"><b class="mono">1000+</b><span data-i18n="stat3">üzv</span></div>
+      <div class="stat"><b class="mono">3</b><span data-i18n="stat4">dil: AZ / EN / RU</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="tools">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="tools_tag">Rəqəmsal Alətlər</span>
+      <h2 data-i18n="tools_h2">İşinizi sürətləndirən rəqəmsal alətlər</h2>
+      <p data-i18n="tools_p">İcmamızdan doğulan alətlər — sahədə real ehtiyaclara görə hazırlanıb, pulsuz istifadə üçün açıqdır.</p>
+    </div>
+    <div class="tools-grid tools-grid-3">
+      <div class="tool-card">
+        <span class="tool-tag">Estimator</span>
+        <h3>IndustrCons Estimator</h3>
+        <p data-i18n="est_p">Tikinti layihənizin dəyərini saniyələr içində hesablayın: sahə, mərtəbə, bina növünə görə dəqiq smeta, material miqdarı və printable PDF hesabat.</p>
+        <ul>
+          <li data-i18n="est_l1">7 addımlı smeta sihirbazı və vizual dashboard</li>
+          <li data-i18n="est_l2">Region üzrə qiymət əmsalları (Bakı, Gəncə, Sumqayıt və s.)</li>
+          <li data-i18n="est_l3">Loqolu, QR kodlu PDF smeta hesabatı</li>
+        </ul>
+        <a class="btn btn-dark" href="https://industrconsestimator.netlify.app/" target="_blank" rel="noopener" data-i18n="open_btn">Estimator-u aç ↗</a>
+      </div>
+      <div class="tool-card">
+        <span class="tool-tag">Docs</span>
+        <h3>IndustrCons Docs</h3>
+        <p data-i18n="docs_p">HSE, KEY/KEN, sənəd idarəetməsi və sahə mühəndisliyi üçün 80-dən çox hazır PDF şablonu, mühəndis kalkulyatorları və Excel alətləri.</p>
+        <ul>
+          <li data-i18n="docs_l1">86+ hazır sənəd şablonu, 4 əsas kateqoriya</li>
+          <li data-i18n="docs_l2">18 mühəndis kalkulyatoru (beton həcmi, armatur çəkisi və s.)</li>
+          <li data-i18n="docs_l3">Tam Azərbaycan dilində, çap üçün hazır formatlarda</li>
+        </ul>
+        <a class="btn btn-dark" href="https://industrconsdocs.netlify.app/" target="_blank" rel="noopener" data-i18n="open_btn">Docs-u aç ↗</a>
+      </div>
+      <div class="tool-card">
+        <span class="tool-tag">Workspace</span>
+        <h3>IndustrCons Workspace</h3>
+        <p data-i18n="ws_p">Layihə idarəetməsi üçün brauzerdə işləyən tam iş sahəsi: Kanban lövhə, sahə gündəliyi, risk reyestri və mühəndis kalkulyatorları — hamısı bir yerdə.</p>
+        <ul>
+          <li data-i18n="ws_l1">Kanban lövhə, Dashboard, Sahə Gündəliyi, Gündəlik Planlayıcı</li>
+          <li data-i18n="ws_l2">Risk Reyestri, QA/QC və Təhlükəsizlik checklistləri</li>
+          <li data-i18n="ws_l3">BOQ, Beton həcmi və Armatur çəkisi kalkulyatorları — məlumat cihazınızda saxlanılır</li>
+        </ul>
+        <a class="btn btn-dark" href="https://elvinasgar.github.io/IndustrCons-Workspace-/" target="_blank" rel="noopener" data-i18n="open_btn">Workspace-i aç ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ecosystem">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="eco_tag">Ekosistem</span>
+      <h2 data-i18n="eco_h2">IndustrCons platformaları</h2>
+      <p data-i18n="eco_p">Estimator və Docs-dan başqa, icmamızın inkişaf etdirdiyi digər platformalar.</p>
+    </div>
+    <div class="eco-grid">
+      <div class="eco-card">
+        <span class="icon">🧠</span>
+        <h4 data-i18n="eco1_h">Knowledge Center</h4>
+        <p data-i18n="eco1_p">Tikinti və mühəndislik sahəsi üzrə strukturlaşdırılmış bilik bazası və resurslar.</p>
+        <a class="go" href="https://industrcons-knowledge-center.vercel.app/" target="_blank" rel="noopener" data-i18n="go">Keç →</a>
+      </div>
+      <div class="eco-card">
+        <span class="icon">🤖</span>
+        <h4 data-i18n="eco2_h">IndustrCons AI</h4>
+        <p data-i18n="eco2_p">Tikinti sahəsinə xüsusi süni intellekt köməkçisi — suallara cavab verir, resurs tövsiyə edir.</p>
+        <a class="go" href="https://elvinasgar.github.io/IndustrCons-AI/" target="_blank" rel="noopener" data-i18n="go">Keç →</a>
+      </div>
+      <div class="eco-card">
+        <span class="icon">🎮</span>
+        <h4 data-i18n="eco3_h">IndustrCons Games</h4>
+        <p data-i18n="eco3_p">Mühəndislik biliklərini əyləncəli formada möhkəmləndirən interaktiv oyunlar.</p>
+        <a class="go" href="https://elvinasgar.github.io/IndustrCons-Games/" target="_blank" rel="noopener" data-i18n="go">Keç →</a>
+      </div>
+      <div class="eco-card">
+        <span class="icon">💼</span>
+        <h4 data-i18n="eco4_h">Virtual Internship</h4>
+        <p data-i18n="eco4_p">Tapşırıq əsaslı virtual təcrübə proqramı — real sahə ssenariləri üzərində praktika.</p>
+        <a class="go" href="https://elvinasgar.github.io/IndustrCons-Virtual-Internship/" target="_blank" rel="noopener" data-i18n="go">Keç →</a>
+      </div>
+      <div class="eco-card">
+        <span class="icon">🗺️</span>
+        <h4 data-i18n="eco5_h">Engineering Map</h4>
+        <p data-i18n="eco5_p">Mühəndislik ixtisasları, şirkətlər və layihələrin interaktiv xəritəsi.</p>
+        <a class="go" href="https://elvinasgar.github.io/IndustrCons-Enginering-Map/" target="_blank" rel="noopener" data-i18n="go">Keç →</a>
+      </div>
+      <div class="eco-card">
+        <span class="icon">📚</span>
+        <h4 data-i18n="eco6_h">Engineering Comics</h4>
+        <p data-i18n="eco6_p">Mühəndislik anlayışlarını komiks formatında sadə, vizual və yadda qalan şəkildə izah edən tədris resursu.</p>
+        <a class="go" href="https://elvinasgar.github.io/IndustrCons-Engineering-Comics/" target="_blank" rel="noopener" data-i18n="go">Keç →</a>
+      </div>
+      <div class="eco-card">
+        <span class="icon">🏛️</span>
+        <h4 data-i18n="eco8_h">SkillsHub</h4>
+        <p data-i18n="eco8_p">Universitet səviyyəli ixtisas proqramları: fənlər üzrə YouTube və digər konspektlərə çıxış, bildiyiniz fənni sürətlə bitirmə imkanı, sonda diplom və sertifikat.</p>
+        <span class="badge-soon" data-i18n="in_dev">İnkişaf mərhələsində</span>
+        <a class="go" href="https://elvinasgar.github.io/IndustrCons-SkillsHub/" target="_blank" rel="noopener" data-i18n="go">Keç →</a>
+      </div>
+      <div class="eco-card">
+        <span class="icon">📈</span>
+        <h4 data-i18n="eco7_h">Yeni platformalar</h4>
+        <p data-i18n="eco7_p">Ekosistemimiz daim genişlənir — yeni alətlər və proqramlar yolda.</p>
+        <span class="badge-soon" data-i18n="soon">Tezliklə</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="events" class="events-section">
+  <div class="wrap events-wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="events_tag">IC Events</span>
+      <h2 data-i18n="events_h2">Lisenziya əsasında tədbir keçirin</h2>
+      <p data-i18n="events_p">IC Event — IndustrCons tərəfindən qurulan icma tədbirləri şəbəkəsidir. Kökümüz mühəndislikdədir, digər sahələrdən müraciətlərə də açığıq.</p>
+    </div>
+    <div class="events-badges">
+      <span class="events-badge" data-i18n="ev_b1">🌍 Qlobal</span>
+      <span class="events-badge" data-i18n="ev_b2">📍 Yerli</span>
+      <span class="events-badge" data-i18n="ev_b3">🎓 Universitetlər</span>
+      <span class="events-badge" data-i18n="ev_b4">🏢 Ofislər</span>
+      <span class="events-badge" data-i18n="ev_b5">💻 Onlayn</span>
+      <span class="events-badge" data-i18n="ev_b6">🤝 Oflayn</span>
+      <span class="events-badge" data-i18n="ev_b7">🔀 Hibrid</span>
+    </div>
+    <div class="events-grid">
+      <div>
+        <p data-i18n="events_desc">Şirkətdə, universitetdə, açıq məkanda və ya onlayn — IC Event lisenziyası ilə istənilən yerdə, istənilən formatda tədbir təşkil edə bilərsiniz. Format sərbəstdir: canlı seminar, podcast epizodu, vebinar və ya hibrid konfrans — həm Bakıda, həm də dünyanın istənilən nöqtəsində.</p>
+        <div class="events-formats">
+          <div class="events-format"><b>🎤</b><span data-i18n="ev_f1"><b>Standart:</b> Şirkət, universitet və ya açıq məkanda canlı, üz-üzə tədbir.</span></div>
+          <div class="events-format"><b>🌱</b><span data-i18n="ev_f2"><b>Green Events:</b> Davamlılıq və yaşıl mühəndislik mövzularına həsr olunmuş tədbirlər.</span></div>
+          <div class="events-format"><b>🎙️</b><span data-i18n="ev_f3"><b>Podcast:</b> Qeydə alınan söhbət epizodları, YouTube kanalında yayımlanır.</span></div>
+          <div class="events-format"><b>🖥️</b><span data-i18n="ev_f4"><b>Vebinar:</b> Onlayn, uzaqdan qoşulan iştirakçılar üçün, istənilən sahə üzrə.</span></div>
+          <div class="events-format"><b>🔀</b><span data-i18n="ev_f5"><b>Hibrid:</b> Həm zalda, həm onlayn — daha geniş auditoriyaya çatmaq üçün.</span></div>
+        </div>
+        <div class="events-cta">
+          <a class="btn btn-primary" href="https://elvinasgar.github.io/IndustrCons-IC-events-/license.html" target="_blank" rel="noopener" data-i18n="ev_apply">Lisenziya üçün müraciət et</a>
+          <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.3);" href="https://elvinasgar.github.io/IndustrCons-IC-events-/" target="_blank" rel="noopener" data-i18n="ev_visit">IC Events saytına bax ↗</a>
+          <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.3);" href="https://www.youtube.com/@IndustrConsEventsOfficial" target="_blank" rel="noopener" data-i18n="ev_youtube">▶️ YouTube kanalı</a>
+        </div>
+      </div>
+      <div class="events-card">
+        <span class="license-tag" data-i18n="ev_active">AKTİV · BAKI, AZƏRBAYCAN</span>
+        <h4>IC – MÜSİAD Azərbaycan</h4>
+        <p data-i18n="ev_organizer">Təşkilatçı: Elvin Əsgərov · Tərəfdaş: MÜSİAD</p>
+        <p style="color:#8A9199;font-size:0.8rem;" data-i18n="ev_dates">Lisenziya tarixi: 19.08.2026 · Etibarlıdır: 19.08.2027</p>
+        <a class="btn btn-dark" style="background:#fff;color:var(--ink);width:fit-content;" href="https://elvinasgar.github.io/IndustrCons-IC-events-/organizers.html" target="_blank" rel="noopener" data-i18n="ev_registry">Tam reyestrə bax →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="groups">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="groups_tag">İcma</span>
+      <h2 data-i18n="groups_h2">Sahənizə uyğun qrupa qoşulun</h2>
+      <p data-i18n="groups_p">Vakansiya paylaşımı, təcrübə mübadiləsi və networking üçün ixtisas üzrə bölünmüş qruplar.</p>
+    </div>
+    <div class="groups-grid">
+      <div class="group-card"><span class="icon">🏗️</span><h4 data-i18n="g1_h">İnşaat Vakansiyaları 1 &amp; 2</h4><p data-i18n="g1_p">Sahə mühəndisi, sahə müdiri və digər inşaat vakansiyaları.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card"><span class="icon">📋</span><h4 data-i18n="g2_h">Ümumi Vakansiyalar</h4><p data-i18n="g2_p">Sənayelərarası vakansiya elanları və iş axtaranlar üçün dəstək.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card"><span class="icon">🦺</span><h4 data-i18n="g3_h">HSE Qrupu</h4><p data-i18n="g3_p">İş təhlükəsizliyi və sağlamlıq üzrə müzakirə və vakansiyalar.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card"><span class="icon">📐</span><h4 data-i18n="g4_h">Topoqraf &amp; GEO Mühəndis</h4><p data-i18n="g4_p">Geodeziya və topoqrafiya sahəsi üzrə peşəkarlar.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card"><span class="icon">🔧</span><h4 data-i18n="g5_h">MEP Mühəndisləri</h4><p data-i18n="g5_p">Mexaniki, elektrik və santexnika sistemləri üzrə mütəxəssislər.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card"><span class="icon">🧑‍💼</span><h4 data-i18n="g6_h">HR Şəbəkəsi</h4><p data-i18n="g6_p">İnsan resursları mütəxəssisləri üçün networking qrupu.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card"><span class="icon">📑</span><h4 data-i18n="g7_h">Tenderlər</h4><p data-i18n="g7_p">Aktual tender elanları və müqavilə imkanları.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card"><span class="icon">👷</span><h4 data-i18n="g8_h">Usta/İşçilər Qrupu</h4><p data-i18n="g8_p">Ustalar və sahə işçiləri üçün iş elanları və əlaqə şəbəkəsi.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card new" data-newlabel="YENİ"><span class="icon">📊</span><h4>PM Group</h4><p data-i18n="g9_p">Layihə meneceri və layihə idarəetməsi üzrə mütəxəssislər.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card new" data-newlabel="YENİ"><span class="icon">✅</span><h4>QA/QC Group</h4><p data-i18n="g10_p">Keyfiyyətə nəzarət və keyfiyyət təminatı mütəxəssisləri.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card new" data-newlabel="YENİ"><span class="icon">🗓️</span><h4>Planning Group</h4><p data-i18n="g11_p">Layihə planlaşdırması və proqram (scheduling) üzrə mütəxəssislər.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+      <div class="group-card new" data-newlabel="YENİ"><span class="icon">🎓</span><h4 data-i18n="g12_h">Gənclər &amp; Tələbələr üçün Dəstək</h4><p data-i18n="g12_p">Tələbələr və yeni məzunlar üçün mentorluq, təcrübə və karyera dəstəyi.</p><a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener" data-i18n="join">Qoşul →</a></div>
+    </div>
+    <div class="channels-row">
+      <a class="channel-chip" href="https://t.me/industrcons" target="_blank" rel="noopener">✈️ Telegram</a>
+      <a class="channel-chip" href="https://whatsapp.com/channel/0029VbCAEQHA89MiFSgGvP1R" target="_blank" rel="noopener">📢 <span data-i18n="wp_channel">WhatsApp Kanalı</span></a>
+      <a class="channel-chip" href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener">✆ <span data-i18n="wp_groups">WhatsApp Qrupları</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="internship" class="internship">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="int_tag">Virtual Təcrübə</span>
+      <h2 data-i18n="int_h2">Virtual Təcrübə Proqramı + Mentorluq + Könüllülük</h2>
+      <p data-i18n="int_p">Təcrübəsi az və ya heç olmayanlar üçün sahədən olan mühəndis və mütəxəssislərin dəstəyi ilə 2 aylıq praktiki proqram.</p>
+    </div>
+    <div class="intern-grid">
+      <div>
+        <div class="intern-facts">
+          <div class="fact"><b>2 <span style="font-size:0.9rem;" data-i18n="months">ay</span></b><span data-i18n="fact1">müəyyən müddətlərdə keçirilir</span></div>
+          <div class="fact"><b data-i18n="fact2_b">Sahə mütəxəssisi</b><span data-i18n="fact2">mühəndislər tərəfindən mentorluq</span></div>
+          <div class="fact"><b data-i18n="fact3_b">Praktiki</b><span data-i18n="fact3">real ssenari əsaslı tapşırıqlar</span></div>
+          <div class="fact"><b data-i18n="fact4_b">Sertifikat</b><span data-i18n="fact4">proqramı bitirənlərə təqdim olunur</span></div>
+        </div>
+        <div class="soon-card">
+          <h5 data-i18n="soon_h">🚀 Tezliklə əlavə olunacaq funksiyalar</h5>
+          <ul>
+            <li data-i18n="soon1">CV əlavə etmə və profil yaratma</li>
+            <li data-i18n="soon2">Vakansiya paylaşma paneli</li>
+            <li data-i18n="soon3">Gündəlik iş elanları bildirişləri</li>
+            <li data-i18n="soon4">Digər virtual təcrübə növləri (tezliklə)</li>
+          </ul>
+        </div>
+        <div class="cv-service">
+          <h5 data-i18n="cv_h">📄 CV və LinkedIn Hazırlama Xidməti</h5>
+          <p data-i18n="cv_p">Peşəkar CV və LinkedIn profili hazırlanması üçün əlaqə saxlayın.</p>
+          <a class="btn btn-primary btn-sm" href="https://wa.me/994775889727" target="_blank" rel="noopener">✆ +994 77 588 97 27 (WhatsApp)</a>
+        </div>
+      </div>
+      <div>
+        <h5 style="font-size:1rem;margin-bottom:14px;" data-i18n="steps_h">Qəbul proseduru</h5>
+        <div class="steps">
+          <div class="step"><span class="num">01</span><div><h5 data-i18n="step1_h">Forum doldurma</h5><p data-i18n="step1_p">Qeydiyyat forması və CV əsasında ilkin qiymətləndirmə.</p></div></div>
+          <div class="step"><span class="num">02</span><div><h5 data-i18n="step2_h">Mini test qiymətləndirməsi</h5><p data-i18n="step2_p">Sahə üzrə bazar biliklərini ölçən qısa test.</p></div></div>
+          <div class="step"><span class="num">03</span><div><h5 data-i18n="step3_h">Video müsahibə</h5><p data-i18n="step3_p">Mentor komandası ilə qısa görüş.</p></div></div>
+          <div class="step"><span class="num">04</span><div><h5 data-i18n="step4_h">Təbriklər 🎉</h5><p data-i18n="step4_p">Proqrama qəbul və 2 aylıq təcrübəyə başlama.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="rm_tag">Karyera</span>
+      <h2 data-i18n="rm_h2">Construction Career Roadmap</h2>
+      <p data-i18n="rm_p">Azərbaycan tikinti bazarına uyğun, 10 istiqamətdə addım-addım karyera yolu. Hər mərhələyə klikləyin: lazımi bacarıqlar, təxmini müddət və tövsiyə olunan sertifikatlar görünsün.</p>
+    </div>
+
+    <div class="rm-tabs">
+      <input type="radio" name="rmtab" id="rmtab-pm" checked>
+      <input type="radio" name="rmtab" id="rmtab-qaqc">
+      <input type="radio" name="rmtab" id="rmtab-hse">
+      <input type="radio" name="rmtab" id="rmtab-plan">
+      <input type="radio" name="rmtab" id="rmtab-mep">
+      <input type="radio" name="rmtab" id="rmtab-est">
+      <input type="radio" name="rmtab" id="rmtab-geo">
+      <input type="radio" name="rmtab" id="rmtab-proc">
+      <input type="radio" name="rmtab" id="rmtab-bim">
+      <input type="radio" name="rmtab" id="rmtab-arch">
+
+      <div class="rm-tablist">
+        <label for="rmtab-pm">🏢 Ümumi Menecment</label>
+        <label for="rmtab-qaqc">✅ QA/QC</label>
+        <label for="rmtab-hse">🦺 HSE</label>
+        <label for="rmtab-plan">🗓️ Planlaşdırma</label>
+        <label for="rmtab-mep">🔧 MEP</label>
+        <label for="rmtab-est">📊 Smeta (Estimation)</label>
+        <label for="rmtab-geo">📐 Geodeziya</label>
+        <label for="rmtab-proc">📦 Satınalma</label>
+        <label for="rmtab-bim">🧊 BIM</label>
+        <label for="rmtab-arch">✏️ Memarlıq</label>
+      </div>
+
+      <div class="rm-panels">
+        <div class="rm-panel" id="panel-pm">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>Virtual Təcrübə / Intern Mühəndis</h4></div><div class="rm-node-meta"><span class="rm-years">0–6 ay</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Çertyoj oxuma əsasları</li><li>AutoCAD və MS Office</li><li>Komanda daxilində ünsiyyət</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Sahə təhlükəsizliyi giriş təlimi</li><li>IndustrCons Virtual Təcrübə Sertifikatı</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>Sahə Mühəndisi (Site Engineer)</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Ölçmə və keyfiyyət nəzarəti</li><li>ŞNiK / normativ sənədlərin tətbiqi</li><li>Gündəlik hesabatlıq</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>AutoCAD sertifikatı</li><li>MS Project əsasları</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük Sahə Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">3–5 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Alt-podratçı koordinasiyası</li><li>Büdcə izləmə</li><li>Qrafik idarəetməsi</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Primavera P6 əsasları</li><li>PMP-ə hazırlıq kursu</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>Layihə Mühəndisi (Project Engineer)</h4></div><div class="rm-node-meta"><span class="rm-years">5–7 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Dizayn koordinasiyası</li><li>Risk idarəetməsi</li><li>Müqavilə şərtləri (FIDIC)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>FIDIC Contract Management</li><li>PMP (tövsiyə olunur)</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">05</span><h4>Layihə Meneceri (PM)</h4></div><div class="rm-node-meta"><span class="rm-years">7–10 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Tam layihə həyat dövrü idarəetməsi</li><li>Maraqlı tərəflərlə əlaqə</li><li>Strateji planlaşdırma</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>PMP (mütləq)</li><li>Primavera P6 Advanced</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">06</span><h4>Tikinti Direktoru / Baş Mühəndis</h4></div><div class="rm-node-meta"><span class="rm-years">10+ il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Strateji rəhbərlik</li><li>Şirkət səviyyəsində qərar qəbulu</li><li>İnvestisiya və risk strategiyası</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Executive MBA</li><li>PMI-RMP</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-qaqc">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>QA/QC Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Keyfiyyət standartları əsasları (ISO)</li><li>Yoxlama vərəqləri (checklist)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>ISO 9001 əsasları</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>QA/QC Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Materialların yoxlanması</li><li>ITP (Inspection Test Plan) hazırlanması</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>ISO 9001 Lead Auditor</li><li>NDT Level I</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük QA/QC Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Qeyri-uyğunluq (NCR) idarəsi</li><li>Podratçı auditi</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>NDT Level II</li><li>Weld Inspector (CSWIP/AWS)</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>QA/QC Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Keyfiyyət sisteminin qurulması</li><li>Komanda rəhbərliyi</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Six Sigma Green Belt</li><li>ISO Lead Auditor</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">05</span><h4>Baş QA/QC Direktoru</h4></div><div class="rm-node-meta"><span class="rm-years">9+ il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Korporativ keyfiyyət strategiyası</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Six Sigma Black Belt</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-hse">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>HSE Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Təhlükəsizlik qaydaları, PPE</li><li>Sahə müşahidəsi</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>HSE əsas giriş təlimi</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>HSE Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Risk qiymətləndirilməsi</li><li>Hadisə araşdırması</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>NEBOSH IGC</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük HSE Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Audit keçirmə</li><li>Təlim proqramlarının hazırlanması</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>NEBOSH Diploma</li><li>ISO 45001</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>HSE Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Sahə HSE strategiyası</li><li>Tənzimləyici əlaqələr</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>IOSH Managing Safely</li><li>NEBOSH Diploma</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">05</span><h4>HSE Direktoru</h4></div><div class="rm-node-meta"><span class="rm-years">9+ il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Korporativ HSE siyasəti</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>CMIOSH</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-plan">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>Planlaşdırma Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Qantt qrafikləri</li><li>Excel əsasları</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>MS Project əsasları</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>Planlaşdırma Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Primavera P6</li><li>İş həcmi hesablama</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Primavera P6 sertifikatı</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük Planlaşdırma Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Resurs yükləmə</li><li>Tənqidi yol analizi (CPM)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Primavera P6 Advanced</li><li>PMI-SP</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>Planlaşdırma Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Çoxlayihəli qrafik koordinasiyası</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>PMI-SP</li><li>PMP</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">05</span><h4>Baş Planlaşdırma Direktoru</h4></div><div class="rm-node-meta"><span class="rm-years">9+ il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Portfel səviyyəsində strategiya</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>PgMP</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-mep">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>MEP Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>MEP çertyojları oxuma</li><li>Əsas hesablamalar</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>AutoCAD MEP əsasları</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>MEP Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>HVAC/elektrik/santexnika nəzarəti</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Revit MEP</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük MEP Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Sistem dizaynı koordinasiyası</li><li>Enerji səmərəliliyi</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>LEED Green Associate</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>MEP Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Çoxdisiplinli komanda rəhbərliyi</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>LEED AP</li><li>PMP</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">05</span><h4>MEP Direktoru</h4></div><div class="rm-node-meta"><span class="rm-years">9+ il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Strateji MEP həlləri</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Chartered Engineer (analoji)</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-est">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>Smeta Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Material/əmək hesablamaları</li><li>Excel</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>IndustrCons Estimator təlimi</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>Smeta Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>BOQ hazırlanması</li><li>Təchizatçı qiymət təhlili</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Cost Estimation əsasları</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük Smeta Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Tender smetaları</li><li>Risk ehtiyatı hesablama</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>AACE sertifikatı</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>Smeta Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Böyük layihə büdcə strategiyası</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>AACE Certified Cost Professional</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">05</span><h4>Baş Smeta Direktoru</h4></div><div class="rm-node-meta"><span class="rm-years">9+ il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Korporativ maliyyə/smeta siyasəti</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>MRICS (analoji)</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-geo">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>Geodeziya Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Nivelir və total stansiya ilə ölçmə</li><li>Excel-də məlumat emalı</li><li>Dəqiqlik və komanda ünsiyyəti (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Total Station əsas təlimi</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>Topoqraf Mühəndis</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>AutoCAD Civil 3D ilə plan tərtibi</li><li>GPS/GNSS ölçmələri</li><li>Vaxt idarəetməsi (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>AutoCAD Civil 3D sertifikatı</li><li>GNSS operator sertifikatı</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük Topoqraf Mühəndis</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Həcm hesablamaları</li><li>Dron (UAV) xəritələmə</li><li>Problemin həlli bacarığı (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>UAV pilotluq sertifikatı</li><li>Civil 3D Advanced</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>Geodeziya / GIS Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Çoxlayihəli komanda idarəetməsi</li><li>Təqdimat və hesabatlıq (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>GIS (ArcGIS) sertifikatı</li><li>PMP (tövsiyə olunur)</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-proc">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>Satınalma Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Bazar araşdırması</li><li>Excel ilə qiymət müqayisəsi</li><li>Ünsiyyət bacarığı (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Satınalma əsasları təlimi</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>Satınalma Mütəxəssisi</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Təchizatçı qiymətləndirilməsi</li><li>Müqavilə şərtlərinin bilinməsi</li><li>Danışıq bacarığı (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>CIPS Level 2 (analoji)</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük Satınalma Mütəxəssisi</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Təchizat zənciri optimallaşdırması</li><li>Çoxvalyuta büdcə idarəsi</li><li>Strateji düşüncə (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>CIPS Level 4</li><li>SAP/ERP əsasları</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>Satınalma Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Komanda rəhbərliyi</li><li>Liderlik və danışıq (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>CIPS Level 6</li><li>SAP MM sertifikatı</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-bim">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>BIM Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Revit əsasları</li><li>3D modelləşdirmə anlayışı</li><li>Diqqətlilik (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Autodesk Revit əsas sertifikatı</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>BIM Mühəndisi / Modelçi</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Revit/Navisworks ilə model hazırlanması</li><li>Kolliziya (clash) analizi</li><li>Komanda işi (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Autodesk Certified Professional (Revit)</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük BIM Mühəndisi</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>BIM koordinasiyası (Navisworks/BIM 360)</li><li>Çoxdisiplinli inteqrasiya</li><li>Problem həll etmə (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>BIM Coordinator sertifikatı</li><li>Navisworks Manage</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>BIM Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>BIM icra planı (BEP) hazırlanması</li><li>Komanda rəhbərliyi (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>ISO 19650 sertifikatı</li><li>BIM Manager sertifikatı</li></ul></div></div>
+          </details>
+        </div>
+
+        <div class="rm-panel" id="panel-arch">
+          <details class="rm-node" open>
+            <summary><div class="rm-node-title"><span class="rm-index">01</span><h4>Memarlıq Təcrübəçisi</h4></div><div class="rm-node-meta"><span class="rm-years">0–1 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>AutoCAD/SketchUp əsasları</li><li>Konseptual eskiz çəkmə</li><li>Yaradıcı düşüncə (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>AutoCAD sertifikatı</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">02</span><h4>Memar / Dizayner</h4></div><div class="rm-node-meta"><span class="rm-years">1–3 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Revit Architecture</li><li>Render (Lumion/Enscape)</li><li>Müştəri ilə ünsiyyət (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>Revit Architecture sertifikatı</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">03</span><h4>Böyük Memar</h4></div><div class="rm-node-meta"><span class="rm-years">3–6 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Layihə konsepsiyasının inkişafı</li><li>Tikinti normalarına uyğunluq</li><li>Təqdimat bacarığı (soft skill)</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>LEED Green Associate</li><li>Enscape/Lumion Advanced</li></ul></div></div>
+          </details>
+          <details class="rm-node">
+            <summary><div class="rm-node-title"><span class="rm-index">04</span><h4>Baş Memar / Dizayn Meneceri</h4></div><div class="rm-node-meta"><span class="rm-years">6–9 il</span><span class="rm-chevron">▾</span></div></summary>
+            <div class="rm-detail-inner"><div class="rm-col"><h6>Bacarıqlar</h6><ul><li>Dizayn komandası rəhbərliyi</li><li>Müştəri danışıqları (soft skill)</li><li>Çoxdisiplinli koordinasiya</li></ul></div><div class="rm-col"><h6>Sertifikatlar</h6><ul><li>LEED AP</li><li>Chartered Architect (analoji)</li></ul></div></div>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <div class="rm-branch-note" data-i18n="rm_branch">
+      <b>Qeyd:</b> Bütün istiqamətlər Sahə Mühəndisi / Təcrübəçi səviyyəsindən başlayır və illər, bacarıqlar, sertifikatlar Azərbaycan tikinti bazarının tələblərinə uyğun tərtib olunub. Karyera yolu şirkətdən şirkətə fərqlənə bilər.
+    </div>
+  </div>
+</section>
+
+<section id="consulting" class="consulting-section">
+  <span class="consulting-blob b1"></span>
+  <span class="consulting-blob b2"></span>
+  <div class="wrap consulting-wrap">
+    <div class="consulting-phase-badge" data-i18n="cons_phase">🔭 Gələcək Mərhələ · Araşdırma aparılır</div>
+    <div class="section-head">
+      <span class="tag" data-i18n="cons_tag">IndustrCons Consulting</span>
+      <h2 data-i18n="cons_h2">Tikinti sahəsində birbaşa icra xidmətləri</h2>
+      <p class="consulting-intro" data-i18n="cons_p">İcmadan irəli gedərək, IndustrCons podratçı və ya subpodratçı qismində, təcrübəli komandalarla, uyğun qiymətə icra xidmətləri təklif etməyə hazırlaşır. Hazırda bazar araşdırması və pilot layihə planlaşdırması mərhələsindəyik.</p>
+    </div>
+    <div class="consulting-grid">
+      <div class="consulting-card">
+        <span class="icon">🏗️</span>
+        <h4 data-i18n="cons1_h">Dəmir-Beton İşləri</h4>
+        <p data-i18n="cons1_p">Armatur bağlama, qəlib quraşdırma, beton tökmə və vibrasiya üzrə komanda dəstəyi.</p>
+      </div>
+      <div class="consulting-card">
+        <span class="icon">🧱</span>
+        <h4 data-i18n="cons2_h">Alçıpan (Gips karton)</h4>
+        <p data-i18n="cons2_p">Divar və tavan sistemlərinin quraşdırılması, otaq bölmələri və karkas işləri.</p>
+      </div>
+      <div class="consulting-card">
+        <span class="icon">🌡️</span>
+        <h4 data-i18n="cons3_h">İzolyasiya</h4>
+        <p data-i18n="cons3_p">İstilik, su və səs izolyasiyası işləri üzrə peşəkar tətbiq.</p>
+      </div>
+      <div class="consulting-card">
+        <span class="icon">🎨</span>
+        <h4 data-i18n="cons4_h">Suvaq və Bəzək İşləri</h4>
+        <p data-i18n="cons4_p">Divar suvağı, hamarlama və bəzək örtüklərinin tətbiqi.</p>
+      </div>
+      <div class="consulting-card">
+        <span class="icon">👷</span>
+        <h4 data-i18n="cons5_h">Sahə Nəzarəti (Supervising)</h4>
+        <p data-i18n="cons5_p">Podratçı fəaliyyətinə texniki nəzarət, keyfiyyət və qrafik təminatı.</p>
+      </div>
+      <div class="consulting-card">
+        <span class="icon">📋</span>
+        <h4 data-i18n="cons6_h">Podratçı / Subpodratçı Xidməti</h4>
+        <p data-i18n="cons6_p">Layihənin bir hissəsini və ya tamamını öhdəliyə götürən icra komandası.</p>
+      </div>
+    </div>
+    <div class="consulting-cta">
+      <a class="btn btn-primary" href="https://wa.me/994775889727" target="_blank" rel="noopener" data-i18n="cons_cta1">✆ Marağınızı bildirin (WhatsApp)</a>
+      <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.3);" href="mailto:industrcons@gmail.com" data-i18n="cons_cta2">✉️ Ətraflı məlumat üçün yazın</a>
+    </div>
+    <p class="consulting-note" data-i18n="cons_note">Qeyd: bu xidmətlər hazırda planlaşdırma mərhələsindədir və rəsmi işə salınma tarixi elan olunmayıb. Maraqlananlar əvvəlcədən qeydiyyata düşə bilər.</p>
+  </div>
+</section>
+
+<section id="mission">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="mvv_tag">Missiya · Vizyon · Dəyərlər</span>
+      <h2 data-i18n="mvv_h2">Nəyə görə mövcuduq</h2>
+      <p data-i18n="mvv_p">IndustrCons-un fəaliyyətini istiqamətləndirən əsas prinsiplər.</p>
+    </div>
+    <div class="mvv-grid">
+      <div class="mvv-card">
+        <span class="icon">🎯</span>
+        <h3 data-i18n="mission_h">Missiya</h3>
+        <p data-i18n="mission_p">Azərbaycanda tikinti və mühəndislik sahəsində çalışan hər kəsə — təcrübəli mütəxəssisdən tələbəyə qədər — doğru resurslara, doğru insanlarla əlaqəyə və rəqəmsal alətlərə bərabər çıxış imkanı yaratmaq.</p>
+      </div>
+      <div class="mvv-card">
+        <span class="icon">🔭</span>
+        <h3 data-i18n="vision_h">Vizyon</h3>
+        <p data-i18n="vision_p">Azərbaycanın ən böyük və etibarlı tikinti-mühəndislik rəqəmsal ekosisteminə çevrilmək — təhsildən karyeraya qədər hər addımda yanında olan bir platforma.</p>
+      </div>
+      <div class="mvv-card">
+        <span class="icon">💎</span>
+        <h3 data-i18n="values_h">Dəyərlər</h3>
+        <ul>
+          <li data-i18n="value1"><b>Şəffaflıq</b> — açıq və düzgün ünsiyyət</li>
+          <li data-i18n="value2"><b>Peşəkarlıq</b> — keyfiyyətli, etibarlı məzmun</li>
+          <li data-i18n="value3"><b>Bərabər imkan</b> — təcrübədən asılı olmayan dəstək</li>
+          <li data-i18n="value4"><b>İcma ruhu</b> — birgə inkişaf və dəstəkləşmə</li>
+          <li data-i18n="value5"><b>İnnovasiya</b> — davamlı rəqəmsal inkişaf</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="about_tag">Haqqımızda</span>
+      <h2 data-i18n="about_h2">IndustrCons nədir?</h2>
+      <p data-i18n="about_p">Tək bir WhatsApp qrupundan başlayan təşəbbüs, bu gün Azərbaycanda tikinti və mühəndislik sahəsinin ən aktiv rəqəmsal ekosistemlərindən birinə çevrilib.</p>
+    </div>
+    <div class="about-grid">
+      <div class="pillars">
+        <div class="pillar"><h4 data-i18n="p1_h">Vakansiya paylaşımı</h4><p data-i18n="p1_p">İş axtaranları və işəgötürənləri ixtisas üzrə bölünmüş qruplarda birbaşa əlaqələndiririk.</p></div>
+        <div class="pillar"><h4 data-i18n="p2_h">Networking</h4><p data-i18n="p2_p">Sahə mühəndisindən podratçıya qədər — sahədəki hər kəs üçün əlaqə qurma məkanı.</p></div>
+        <div class="pillar"><h4 data-i18n="p3_h">Virtual təcrübə &amp; mentorluq</h4><p data-i18n="p3_p">Təcrübəsi az olanlara peşəkarlardan praktiki dəstək və sertifikat.</p></div>
+        <div class="pillar"><h4 data-i18n="p4_h">Karyera xəritəsi</h4><p data-i18n="p4_p">Sektor üzrə vəzifə artımı yolunu, bacarıq və sertifikatları izləyin.</p></div>
+        <div class="pillar"><h4 data-i18n="p5_h">Rəqəmsal alətlər</h4><p data-i18n="p5_p">Estimator, Docs, Workspace, AI, Knowledge Center, Games və Engineering Map.</p></div>
+        <div class="pillar"><h4 data-i18n="p6_h">CV &amp; LinkedIn dəstəyi</h4><p data-i18n="p6_p">Peşəkar profil hazırlanmasında birbaşa dəstək xidməti.</p></div>
+      </div>
+      <div class="founder-card">
+        <div class="avatar">EƏ</div>
+        <h3>Elvin Əsgərov</h3>
+        <p style="color:var(--signal);font-size:0.85rem;font-weight:600;margin-top:2px;" data-i18n="founder_tag">IndustrCons-un yaradıcısı</p>
+        <p data-i18n="founder_p">IndustrCons Azərbaycanda tikinti sektorunda şəffaf əlaqə, əlçatan qiymətləndirmə və peşəkar dəstək ehtiyacından yaranıb. Məqsəd — sahədəki hər kəsə, təcrübəsindən asılı olmayaraq, doğru resurs və doğru insanlarla əlaqə imkanı yaratmaqdır.</p>
+        <div class="founder-contact">
+          <a href="mailto:elvinasgarov12@gmail.com">✉️ elvinasgarov12@gmail.com</a>
+          <a href="tel:+994775889727">📞 +994 77 588 97 27</a>
+          <a href="https://www.linkedin.com/in/elvinasgarov/" target="_blank" rel="noopener">in LinkedIn (şəxsi)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="social-band">
+  <div class="wrap social-wrap">
+    <div>
+      <h3 style="font-size:1.1rem;" data-i18n="follow_h">Bizi izləyin</h3>
+      <p style="color:var(--rebar);font-size:0.88rem;margin-top:4px;" data-i18n="follow_p">Yeniliklər, vakansiyalar və sənaye məzmunu üçün</p>
+    </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/company/industrcons/" target="_blank" rel="noopener">in LinkedIn</a>
+      <a href="https://www.instagram.com/industrcons" target="_blank" rel="noopener">◎ Instagram</a>
+      <a href="https://x.com/IndustrCons" target="_blank" rel="noopener">𝕏 X</a>
+      <a href="https://www.youtube.com/@IndustrConsEventsOfficial" target="_blank" rel="noopener">▶️ YouTube (IC Events)</a>
+      <a href="https://t.me/industrcons" target="_blank" rel="noopener">✈️ Telegram</a>
+      <a href="https://whatsapp.com/channel/0029VbCAEQHA89MiFSgGvP1R" target="_blank" rel="noopener">📢 WA Channel</a>
+      <a href="https://chat.whatsapp.com/ETbokd3omE5CIbzA5hcq6H" target="_blank" rel="noopener">✆ WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="logo"><img src="logo.png" alt="IndustrCons logo" style="height:32px;"></div>
+      <p style="max-width:340px;" data-i18n="footer_p">Azərbaycanda tikinti sənayesi üçün icma, virtual təcrübə, karyera xəritəsi və rəqəmsal alətlər platforması.</p>
+      <p style="margin-top:10px;font-size:0.85rem;"><a href="mailto:industrcons@gmail.com">✉️ industrcons@gmail.com</a></p>
+    </div>
+    <div class="foot-links">
+      <a href="#tools">Estimator</a>
+      <a href="#tools">Docs</a>
+      <a href="#ecosystem" data-i18n="nav_eco">Platformalar</a>
+      <a href="#events" data-i18n="nav_events">IC Events</a>
+      <a href="#internship" data-i18n="nav_intern">Virtual Təcrübə</a>
+      <a href="#roadmap" data-i18n="nav_roadmap">Karyera Xəritəsi</a>
+      <a href="https://t.me/industrcons" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://x.com/IndustrCons" target="_blank" rel="noopener">X</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:24px;">
+    <p>© 2026 IndustrCons. <span data-i18n="rights">Bütün hüquqlar qorunur.</span></p>
+  </div>
+</footer>
+
+<button id="ai-toggle" aria-label="AI Assistant">x</button>
+<div id="ai-panel">
+  <div id="ai-head">
+    <h5 data-i18n="ai_title">IndustrCons Köməkçi</h5>
+    <span data-i18n="ai_status">Offline · Açar sözlərlə</span>
+    <button id="ai-close" aria-label="Bağla">✕</button>
+  </div>
+  <div id="ai-body"></div>
+  <div id="ai-quick"></div>
+  <div id="ai-input-row">
+    <input id="ai-input" type="text" data-i18n-ph="ai_ph" placeholder="Sualınızı yazın... (məs: estimator)">
+    <button id="ai-send" data-i18n="ai_send">Göndər</button>
+  </div>
+</div>
+
+<script>
+/* ===================== I18N ===================== */
+const I18N = {
+  az: {
+    nav_tools:"Alətlər", nav_eco:"Platformalar", nav_events:"IC Events", nav_groups:"İcma", nav_intern:"Virtual Təcrübə", nav_roadmap:"Karyera Xəritəsi", nav_about:"Haqqımızda", nav_join:"Qoşul",
+    hero_eyebrow:"Azərbaycan · Tikinti &amp; Mühəndislik Şəbəkəsi",
+    hero_title:'Tikinti sənayesinin insanlarını və <span>alətlərini</span> bir yerə yığırıq.',
+    hero_sub:"IndustrCons — mühəndislərin, sahə mütəxəssislərinin və tələbələrin vakansiya paylaşdığı, networking qurduğu icmadır. Estimator, Docs, Workspace, AI, Biliklər Mərkəzi, Oyunlar, Virtual Təcrübə və Mühəndislik Xəritəsi — hamısı bir ekosistemdə.",
+    hero_cta1:"Ekosistemi kəşf et", hero_cta2:"İcma qruplarını gör",
+    stat1:"rəqəmsal platforma", stat2:"ixtisaslaşmış qrup", stat3:"üzv", stat4:"dil: AZ / EN / RU",
+    tools_tag:"Rəqəmsal Alətlər", tools_h2:"İşinizi sürətləndirən rəqəmsal alətlər", tools_p:"İcmamızdan doğulan alətlər — sahədə real ehtiyaclara görə hazırlanıb, pulsuz istifadə üçün açıqdır.",
+    est_p:"Tikinti layihənizin dəyərini saniyələr içində hesablayın: sahə, mərtəbə, bina növünə görə dəqiq smeta, material miqdarı və printable PDF hesabat.",
+    est_l1:"7 addımlı smeta sihirbazı və vizual dashboard", est_l2:"Region üzrə qiymət əmsalları (Bakı, Gəncə, Sumqayıt və s.)", est_l3:"Loqolu, QR kodlu PDF smeta hesabatı",
+    docs_p:"HSE, KEY/KEN, sənəd idarəetməsi və sahə mühəndisliyi üçün 80-dən çox hazır PDF şablonu, mühəndis kalkulyatorları və Excel alətləri.",
+    docs_l1:"86+ hazır sənəd şablonu, 4 əsas kateqoriya", docs_l2:"18 mühəndis kalkulyatoru (beton həcmi, armatur çəkisi və s.)", docs_l3:"Tam Azərbaycan dilində, çap üçün hazır formatlarda",
+    ws_p:"Layihə idarəetməsi üçün brauzerdə işləyən tam iş sahəsi: Kanban lövhə, sahə gündəliyi, risk reyestri və mühəndis kalkulyatorları — hamısı bir yerdə.",
+    ws_l1:"Kanban lövhə, Dashboard, Sahə Gündəliyi, Gündəlik Planlayıcı", ws_l2:"Risk Reyestri, QA/QC və Təhlükəsizlik checklistləri", ws_l3:"BOQ, Beton həcmi və Armatur çəkisi kalkulyatorları — məlumat cihazınızda saxlanılır",
+    open_btn:"Aç ↗", go:"Keç →", soon:"Tezliklə",
+    eco_tag:"Ekosistem", eco_h2:"IndustrCons platformaları", eco_p:"Estimator və Docs-dan başqa, icmamızın inkişaf etdirdiyi digər platformalar.",
+    eco1_h:"Knowledge Center", eco1_p:"Tikinti və mühəndislik sahəsi üzrə strukturlaşdırılmış bilik bazası və resurslar.",
+    eco2_h:"IndustrCons AI", eco2_p:"Tikinti sahəsinə xüsusi süni intellekt köməkçisi — suallara cavab verir, resurs tövsiyə edir.",
+    eco3_h:"IndustrCons Games", eco3_p:"Mühəndislik biliklərini əyləncəli formada möhkəmləndirən interaktiv oyunlar.",
+    eco4_h:"Virtual Internship", eco4_p:"Tapşırıq əsaslı virtual təcrübə proqramı — real sahə ssenariləri üzərində praktika.",
+    eco5_h:"Engineering Map", eco5_p:"Mühəndislik ixtisasları, şirkətlər və layihələrin interaktiv xəritəsi.",
+    eco6_h:"Engineering Comics", eco6_p:"Mühəndislik anlayışlarını komiks formatında sadə, vizual və yadda qalan şəkildə izah edən tədris resursu.",
+    eco8_h:"SkillsHub", eco8_p:"Universitet səviyyəli ixtisas proqramları: fənlər üzrə YouTube və digər konspektlərə çıxış, bildiyiniz fənni sürətlə bitirmə imkanı, sonda diplom və sertifikat.", in_dev:"İnkişaf mərhələsində",
+    eco7_h:"Yeni platformalar", eco7_p:"Ekosistemimiz daim genişlənir — yeni alətlər və proqramlar yolda.",
+    events_tag:"IC Events", events_h2:"Lisenziya əsasında tədbir keçirin", events_p:"IC Event — IndustrCons tərəfindən qurulan icma tədbirləri şəbəkəsidir. Kökümüz mühəndislikdədir, digər sahələrdən müraciətlərə də açığıq.",
+    ev_b1:"🌍 Qlobal", ev_b2:"📍 Yerli", ev_b3:"🎓 Universitetlər", ev_b4:"🏢 Ofislər", ev_b5:"💻 Onlayn", ev_b6:"🤝 Oflayn", ev_b7:"🔀 Hibrid",
+    events_desc:"Şirkətdə, universitetdə, açıq məkanda və ya onlayn — IC Event lisenziyası ilə istənilən yerdə, istənilən formatda tədbir təşkil edə bilərsiniz. Format sərbəstdir: canlı seminar, podcast epizodu, vebinar və ya hibrid konfrans — həm Bakıda, həm də dünyanın istənilən nöqtəsində.",
+    ev_f1:"<b>Standart:</b> Şirkət, universitet və ya açıq məkanda canlı, üz-üzə tədbir.", ev_f2:"<b>Green Events:</b> Davamlılıq və yaşıl mühəndislik mövzularına həsr olunmuş tədbirlər.", ev_f3:"<b>Podcast:</b> Qeydə alınan söhbət epizodları, YouTube kanalında yayımlanır.", ev_f4:"<b>Vebinar:</b> Onlayn, uzaqdan qoşulan iştirakçılar üçün, istənilən sahə üzrə.", ev_f5:"<b>Hibrid:</b> Həm zalda, həm onlayn — daha geniş auditoriyaya çatmaq üçün.",
+    ev_apply:"Lisenziya üçün müraciət et", ev_visit:"IC Events saytına bax ↗", ev_active:"AKTİV · BAKI, AZƏRBAYCAN", ev_organizer:"Təşkilatçı: Elvin Əsgərov · Tərəfdaş: MÜSİAD", ev_dates:"Lisenziya tarixi: 19.08.2026 · Etibarlıdır: 19.08.2027", ev_registry:"Tam reyestrə bax →", ev_youtube:"▶️ YouTube kanalı",
+    groups_tag:"İcma", groups_h2:"Sahənizə uyğun qrupa qoşulun", groups_p:"Vakansiya paylaşımı, təcrübə mübadiləsi və networking üçün ixtisas üzrə bölünmüş qruplar.",
+    g1_h:"İnşaat Vakansiyaları 1 &amp; 2", g1_p:"Sahə mühəndisi, sahə müdiri və digər inşaat vakansiyaları.",
+    g2_h:"Ümumi Vakansiyalar", g2_p:"Sənayelərarası vakansiya elanları və iş axtaranlar üçün dəstək.",
+    g3_h:"HSE Qrupu", g3_p:"İş təhlükəsizliyi və sağlamlıq üzrə müzakirə və vakansiyalar.",
+    g4_h:"Topoqraf &amp; GEO Mühəndis", g4_p:"Geodeziya və topoqrafiya sahəsi üzrə peşəkarlar.",
+    g5_h:"MEP Mühəndisləri", g5_p:"Mexaniki, elektrik və santexnika sistemləri üzrə mütəxəssislər.",
+    g6_h:"HR Şəbəkəsi", g6_p:"İnsan resursları mütəxəssisləri üçün networking qrupu.",
+    g7_h:"Tenderlər", g7_p:"Aktual tender elanları və müqavilə imkanları.",
+    g8_h:"Usta/İşçilər Qrupu", g8_p:"Ustalar və sahə işçiləri üçün iş elanları və əlaqə şəbəkəsi.",
+    g9_p:"Layihə meneceri və layihə idarəetməsi üzrə mütəxəssislər.",
+    g10_p:"Keyfiyyətə nəzarət və keyfiyyət təminatı mütəxəssisləri.",
+    g11_p:"Layihə planlaşdırması və proqram (scheduling) üzrə mütəxəssislər.",
+    g12_h:"Gənclər &amp; Tələbələr üçün Dəstək", g12_p:"Tələbələr və yeni məzunlar üçün mentorluq, təcrübə və karyera dəstəyi.",
+    join:"Qoşul →", wp_channel:"WhatsApp Kanalı", wp_groups:"WhatsApp Qrupları",
+    int_tag:"Virtual Təcrübə", int_h2:"Virtual Təcrübə Proqramı + Mentorluq + Könüllülük",
+    int_p:"Təcrübəsi az və ya heç olmayanlar üçün sahədən olan mühəndis və mütəxəssislərin dəstəyi ilə 2 aylıq praktiki proqram.",
+    months:"ay", fact1:"müəyyən müddətlərdə keçirilir", fact2_b:"Sahə mütəxəssisi", fact2:"mühəndislər tərəfindən mentorluq",
+    fact3_b:"Praktiki", fact3:"real ssenari əsaslı tapşırıqlar", fact4_b:"Sertifikat", fact4:"proqramı bitirənlərə təqdim olunur",
+    soon_h:"🚀 Tezliklə əlavə olunacaq funksiyalar", soon1:"CV əlavə etmə və profil yaratma", soon2:"Vakansiya paylaşma paneli", soon3:"Gündəlik iş elanları bildirişləri", soon4:"Digər virtual təcrübə növləri (tezliklə)",
+    cv_h:"📄 CV və LinkedIn Hazırlama Xidməti", cv_p:"Peşəkar CV və LinkedIn profili hazırlanması üçün əlaqə saxlayın.",
+    steps_h:"Qəbul proseduru",
+    step1_h:"Forum doldurma", step1_p:"Qeydiyyat forması və CV əsasında ilkin qiymətləndirmə.",
+    step2_h:"Mini test qiymətləndirməsi", step2_p:"Sahə üzrə bazar biliklərini ölçən qısa test.",
+    step3_h:"Video müsahibə", step3_p:"Mentor komandası ilə qısa görüş.",
+    step4_h:"Təbriklər 🎉", step4_p:"Proqrama qəbul və 2 aylıq təcrübəyə başlama.",
+    rm_tag:"Karyera", rm_h2:"Construction Career Roadmap", rm_p:"Azərbaycan tikinti bazarına uyğun, 10 istiqamətdə addım-addım karyera yolu. Hər mərhələyə klikləyin: lazımi bacarıqlar, təxmini müddət və tövsiyə olunan sertifikatlar görünsün.",
+    rm_branch:'<b>Paralel ixtisas yolları:</b> Sahə Mühəndisi səviyyəsindən etibarən QA/QC, Planlaşdırma, HSE, Smeta (Estimation) və MEP kimi ixtisaslaşmış istiqamətlərə yönəlmək də mümkündür.',
+    nav_consulting:"Consulting",
+    cons_phase:"🔭 Gələcək Mərhələ · Araşdırma aparılır",
+    cons_tag:"IndustrCons Consulting", cons_h2:"Tikinti sahəsində birbaşa icra xidmətləri",
+    cons_p:"İcmadan irəli gedərək, IndustrCons podratçı və ya subpodratçı qismində, təcrübəli komandalarla, uyğun qiymətə icra xidmətləri təklif etməyə hazırlaşır. Hazırda bazar araşdırması və pilot layihə planlaşdırması mərhələsindəyik.",
+    cons1_h:"Dəmir-Beton İşləri", cons1_p:"Armatur bağlama, qəlib quraşdırma, beton tökmə və vibrasiya üzrə komanda dəstəyi.",
+    cons2_h:"Alçıpan (Gips karton)", cons2_p:"Divar və tavan sistemlərinin quraşdırılması, otaq bölmələri və karkas işləri.",
+    cons3_h:"İzolyasiya", cons3_p:"İstilik, su və səs izolyasiyası işləri üzrə peşəkar tətbiq.",
+    cons4_h:"Suvaq və Bəzək İşləri", cons4_p:"Divar suvağı, hamarlama və bəzək örtüklərinin tətbiqi.",
+    cons5_h:"Sahə Nəzarəti (Supervising)", cons5_p:"Podratçı fəaliyyətinə texniki nəzarət, keyfiyyət və qrafik təminatı.",
+    cons6_h:"Podratçı / Subpodratçı Xidməti", cons6_p:"Layihənin bir hissəsini və ya tamamını öhdəliyə götürən icra komandası.",
+    cons_cta1:"✆ Marağınızı bildirin (WhatsApp)", cons_cta2:"✉️ Ətraflı məlumat üçün yazın",
+    cons_note:"Qeyd: bu xidmətlər hazırda planlaşdırma mərhələsindədir və rəsmi işə salınma tarixi elan olunmayıb. Maraqlananlar əvvəlcədən qeydiyyata düşə bilər.",
+    nav_mission:"Missiya",
+    mvv_tag:"Missiya · Vizyon · Dəyərlər", mvv_h2:"Nəyə görə mövcuduq", mvv_p:"IndustrCons-un fəaliyyətini istiqamətləndirən əsas prinsiplər.",
+    mission_h:"Missiya", mission_p:"Azərbaycanda tikinti və mühəndislik sahəsində çalışan hər kəsə — təcrübəli mütəxəssisdən tələbəyə qədər — doğru resurslara, doğru insanlarla əlaqəyə və rəqəmsal alətlərə bərabər çıxış imkanı yaratmaq.",
+    vision_h:"Vizyon", vision_p:"Azərbaycanın ən böyük və etibarlı tikinti-mühəndislik rəqəmsal ekosisteminə çevrilmək — təhsildən karyeraya qədər hər addımda yanında olan bir platforma.",
+    values_h:"Dəyərlər",
+    value1:"<b>Şəffaflıq</b> — açıq və düzgün ünsiyyət", value2:"<b>Peşəkarlıq</b> — keyfiyyətli, etibarlı məzmun", value3:"<b>Bərabər imkan</b> — təcrübədən asılı olmayan dəstək", value4:"<b>İcma ruhu</b> — birgə inkişaf və dəstəkləşmə", value5:"<b>İnnovasiya</b> — davamlı rəqəmsal inkişaf",
+    about_tag:"Haqqımızda", about_h2:"IndustrCons nədir?", about_p:"Tək bir WhatsApp qrupundan başlayan təşəbbüs, bu gün Azərbaycanda tikinti və mühəndislik sahəsinin ən aktiv rəqəmsal ekosistemlərindən birinə çevrilib.",
+    p1_h:"Vakansiya paylaşımı", p1_p:"İş axtaranları və işəgötürənləri ixtisas üzrə bölünmüş qruplarda birbaşa əlaqələndiririk.",
+    p2_h:"Networking", p2_p:"Sahə mühəndisindən podratçıya qədər — sahədəki hər kəs üçün əlaqə qurma məkanı.",
+    p3_h:"Virtual təcrübə &amp; mentorluq", p3_p:"Təcrübəsi az olanlara peşəkarlardan praktiki dəstək və sertifikat.",
+    p4_h:"Karyera xəritəsi", p4_p:"Sektor üzrə vəzifə artımı yolunu, bacarıq və sertifikatları izləyin.",
+    p5_h:"Rəqəmsal alətlər", p5_p:"Estimator, Docs, Workspace, AI, Knowledge Center, Games və Engineering Map.",
+    p6_h:"CV &amp; LinkedIn dəstəyi", p6_p:"Peşəkar profil hazırlanmasında birbaşa dəstək xidməti.",
+    founder_tag:"IndustrCons-un yaradıcısı",
+    founder_p:"IndustrCons Azərbaycanda tikinti sektorunda şəffaf əlaqə, əlçatan qiymətləndirmə və peşəkar dəstək ehtiyacından yaranıb. Məqsəd — sahədəki hər kəsə, təcrübəsindən asılı olmayaraq, doğru resurs və doğru insanlarla əlaqə imkanı yaratmaqdır.",
+    follow_h:"Bizi izləyin", follow_p:"Yeniliklər, vakansiyalar və sənaye məzmunu üçün",
+    footer_p:"Azərbaycanda tikinti sənayesi üçün icma, virtual təcrübə, karyera xəritəsi və rəqəmsal alətlər platforması.",
+    rights:"Bütün hüquqlar qorunur.",
+    ai_title:"IndustrCons Köməkçi", ai_status:"Offline · Açar sözlərlə", ai_send:"Göndər", ai_ph:"Sualınızı yazın... (məs: estimator)",
+    ai_greet:"Salam! Mən IndustrCons-un offline köməkçisiyəm. Açar söz yazın: estimator, docs, təcrübə, vakansiya, CV, sertifikat, qrup, əlaqə.",
+    ai_fallback:"Bunu tam anlamadım. Cəhd edin: 'estimator', 'docs', 'təcrübə', 'vakansiya', 'CV', 'sertifikat' və ya birbaşa dəstək üçün yazın: +994 77 588 97 27",
+  },
+  en: {
+    nav_tools:"Tools", nav_eco:"Platforms", nav_events:"IC Events", nav_groups:"Community", nav_intern:"Virtual Internship", nav_roadmap:"Career Roadmap", nav_about:"About", nav_join:"Join",
+    hero_eyebrow:"Azerbaijan · Construction &amp; Engineering Network",
+    hero_title:'Bringing together the people and <span>tools</span> of the construction industry.',
+    hero_sub:"IndustrCons is a community where engineers, site professionals and students share jobs and build networks. Estimator, Docs, Workspace, AI, Knowledge Center, Games, Virtual Internship and Engineering Map — all in one ecosystem.",
+    hero_cta1:"Explore the ecosystem", hero_cta2:"See community groups",
+    stat1:"digital platforms", stat2:"specialized groups", stat3:"members", stat4:"languages: AZ / EN / RU",
+    tools_tag:"Digital Tools", tools_h2:"Digital tools that speed up your work", tools_p:"Tools born from our community — built for real field needs, free to use.",
+    est_p:"Calculate your construction project's cost in seconds: accurate estimates by area, floor and building type, material quantities and a printable PDF report.",
+    est_l1:"7-step estimate wizard with a visual dashboard", est_l2:"Regional price coefficients (Baku, Ganja, Sumgait, etc.)", est_l3:"Branded, QR-coded PDF estimate report",
+    docs_p:"80+ ready-made PDF templates, engineering calculators and Excel tools for HSE, KEY/KEN, document management and site engineering.",
+    docs_l1:"86+ ready document templates across 4 core categories", docs_l2:"18 engineering calculators (concrete volume, rebar weight, etc.)", docs_l3:"Fully in Azerbaijani, print-ready formats",
+    ws_p:"A full project management workspace that runs in your browser: Kanban board, site diary, risk register and engineering calculators — all in one place.",
+    ws_l1:"Kanban Board, Dashboard, Site Diary, Daily Planner", ws_l2:"Risk Register, QA/QC and Safety checklists", ws_l3:"BOQ, Concrete volume and Rebar weight calculators — data stays on your device",
+    open_btn:"Open ↗", go:"Visit →", soon:"Coming soon",
+    eco_tag:"Ecosystem", eco_h2:"IndustrCons platforms", eco_p:"Beyond Estimator and Docs, other platforms built by our community.",
+    eco1_h:"Knowledge Center", eco1_p:"A structured knowledge base and resources for the construction and engineering field.",
+    eco2_h:"IndustrCons AI", eco2_p:"An AI assistant dedicated to the construction field — answers questions and recommends resources.",
+    eco3_h:"IndustrCons Games", eco3_p:"Interactive games that reinforce engineering knowledge in a fun way.",
+    eco4_h:"Virtual Internship", eco4_p:"A task-based virtual internship program — hands-on practice with real field scenarios.",
+    eco5_h:"Engineering Map", eco5_p:"An interactive map of engineering disciplines, companies and projects.",
+    eco6_h:"Engineering Comics", eco6_p:"A learning resource that explains engineering concepts in comic form — simple, visual and memorable.",
+    eco8_h:"SkillsHub", eco8_p:"University-level specialty programs: access to YouTube and other lecture notes per subject, the option to fast-track a subject you already know, and a diploma/certificate upon completion.", in_dev:"In development",
+    eco7_h:"New platforms", eco7_p:"Our ecosystem keeps growing — new tools and programs are on the way.",
+    events_tag:"IC Events", events_h2:"Run events under license", events_p:"IC Event is a community events network built by IndustrCons. Our roots are in engineering, but we welcome applications from other fields too.",
+    ev_b1:"🌍 Global", ev_b2:"📍 Local", ev_b3:"🎓 Universities", ev_b4:"🏢 Offices", ev_b5:"💻 Online", ev_b6:"🤝 Offline", ev_b7:"🔀 Hybrid",
+    events_desc:"At a company, a university, a public space, or online — with an IC Event license you can organize an event anywhere, in any format. The format is flexible: a live seminar, a podcast episode, a webinar or a hybrid conference — in Baku or anywhere in the world.",
+    ev_f1:"<b>Standard:</b> A live, in-person event at a company, university or public space.", ev_f2:"<b>Green Events:</b> Events focused on sustainability and green engineering.", ev_f3:"<b>Podcast:</b> Recorded conversational episodes, published on YouTube.", ev_f4:"<b>Webinar:</b> Online, for remote participants, across any field.", ev_f5:"<b>Hybrid:</b> Both in the room and online — to reach a wider audience.",
+    ev_apply:"Apply for a license", ev_visit:"Visit IC Events ↗", ev_active:"ACTIVE · BAKU, AZERBAIJAN", ev_organizer:"Organizer: Elvin Əsgərov · Partner: MÜSİAD", ev_dates:"Licensed since: 19.08.2026 · Valid until: 19.08.2027", ev_registry:"See the full registry →", ev_youtube:"▶️ YouTube channel",
+    groups_tag:"Community", groups_h2:"Join the group that fits your field", groups_p:"Specialized groups for job sharing, knowledge exchange and networking.",
+    g1_h:"Construction Jobs 1 &amp; 2", g1_p:"Site engineer, site manager and other construction vacancies.",
+    g2_h:"General Vacancies", g2_p:"Cross-industry job postings and support for job seekers.",
+    g3_h:"HSE Group", g3_p:"Discussion and vacancies on health and safety.",
+    g4_h:"Surveyor &amp; GEO Engineer", g4_p:"Professionals in geodesy and surveying.",
+    g5_h:"MEP Engineers", g5_p:"Specialists in mechanical, electrical and plumbing systems.",
+    g6_h:"HR Network", g6_p:"Networking group for HR professionals.",
+    g7_h:"Tenders", g7_p:"Current tender announcements and contract opportunities.",
+    g8_h:"Foremen/Workers Group", g8_p:"Job postings and networking for foremen and site workers.",
+    g9_p:"Specialists in project management.",
+    g10_p:"Quality assurance and quality control specialists.",
+    g11_p:"Specialists in project planning and scheduling.",
+    g12_h:"Youth &amp; Student Support", g12_p:"Mentorship, internships and career support for students and new graduates.",
+    join:"Join →", wp_channel:"WhatsApp Channel", wp_groups:"WhatsApp Groups",
+    int_tag:"Virtual Internship", int_h2:"Virtual Internship Program + Mentorship + Volunteering",
+    int_p:"A 2-month, hands-on program supported by field engineers and specialists, for those with little or no experience.",
+    months:"months", fact1:"held during set periods", fact2_b:"Field specialists", fact2:"mentorship from engineers",
+    fact3_b:"Practical", fact3:"real scenario-based tasks", fact4_b:"Certificate", fact4:"awarded to those who complete the program",
+    soon_h:"🚀 Coming soon", soon1:"CV upload and profile creation", soon2:"Vacancy sharing panel", soon3:"Daily job posting notifications", soon4:"Other internship types (coming soon)",
+    cv_h:"📄 CV &amp; LinkedIn Preparation Service", cv_p:"Contact us for professional CV and LinkedIn profile preparation.",
+    steps_h:"Admission procedure",
+    step1_h:"Application form", step1_p:"Initial assessment based on the registration form and CV.",
+    step2_h:"Mini-test assessment", step2_p:"A short test measuring field knowledge.",
+    step3_h:"Video interview", step3_p:"A short meeting with the mentor team.",
+    step4_h:"Congratulations 🎉", step4_p:"Admission to the program and start of the 2-month internship.",
+    rm_tag:"Career", rm_h2:"Construction Career Roadmap", rm_p:"A step-by-step career path across 10 specialty tracks in construction, tailored to the Azerbaijan market. Click each stage to see required skills, timeframe and recommended certificates.",
+    rm_branch:'<b>Parallel specialist tracks:</b> From the Site Engineer level onward, you can also move into QA/QC, Planning, HSE, Estimation or MEP specializations.',
+    nav_consulting:"Consulting",
+    cons_phase:"🔭 Future Phase · Research underway",
+    cons_tag:"IndustrCons Consulting", cons_h2:"Direct execution services in construction",
+    cons_p:"Building on our community, IndustrCons is preparing to offer execution services as a contractor or subcontractor — with experienced teams, at fair prices. We are currently in the market research and pilot planning phase.",
+    cons1_h:"Reinforced Concrete Works", cons1_p:"Team support for rebar tying, formwork installation, concrete pouring and vibration.",
+    cons2_h:"Drywall (Gypsum board)", cons2_p:"Installation of wall and ceiling systems, room partitions and framing work.",
+    cons3_h:"Insulation", cons3_p:"Professional application of thermal, waterproofing and acoustic insulation.",
+    cons4_h:"Plastering & Finishing", cons4_p:"Wall plastering, surface levelling and application of finishing coatings.",
+    cons5_h:"Site Supervision", cons5_p:"Technical oversight of contractor activity, quality and schedule assurance.",
+    cons6_h:"Contractor / Subcontractor Service", cons6_p:"An execution team that takes on part or all of a project's scope.",
+    cons_cta1:"✆ Register your interest (WhatsApp)", cons_cta2:"✉️ Write for more information",
+    cons_note:"Note: these services are currently in the planning phase and no official launch date has been announced. Interested parties can pre-register.",
+    nav_mission:"Mission",
+    mvv_tag:"Mission · Vision · Values", mvv_h2:"Why we exist", mvv_p:"The core principles that guide everything IndustrCons does.",
+    mission_h:"Mission", mission_p:"To give everyone working in Azerbaijan's construction and engineering field — from experienced professionals to students — equal access to the right resources, the right people and the right digital tools.",
+    vision_h:"Vision", vision_p:"To become Azerbaijan's largest and most trusted digital ecosystem for construction and engineering — a platform that stands by you from education to career.",
+    values_h:"Values",
+    value1:"<b>Transparency</b> — open and honest communication", value2:"<b>Professionalism</b> — quality, reliable content", value3:"<b>Equal opportunity</b> — support regardless of experience level", value4:"<b>Community spirit</b> — growing and supporting each other together", value5:"<b>Innovation</b> — continuous digital development",
+    about_tag:"About", about_h2:"What is IndustrCons?", about_p:"What started as a single WhatsApp group has become one of Azerbaijan's most active digital ecosystems for construction and engineering.",
+    p1_h:"Job sharing", p1_p:"We directly connect job seekers and employers in specialty-based groups.",
+    p2_h:"Networking", p2_p:"From site engineers to contractors — a space to connect for everyone in the field.",
+    p3_h:"Virtual internship &amp; mentorship", p3_p:"Practical support and certification from professionals for those with little experience.",
+    p4_h:"Career roadmap", p4_p:"Track the path of career growth, skills and certificates in the sector.",
+    p5_h:"Digital tools", p5_p:"Estimator, Docs, Workspace, AI, Knowledge Center, Games and Engineering Map.",
+    p6_h:"CV &amp; LinkedIn support", p6_p:"Direct support service for building a professional profile.",
+    founder_tag:"Founder of IndustrCons",
+    founder_p:"IndustrCons was born from the need for transparent communication, accessible cost estimation and professional support in Azerbaijan's construction sector. The goal: give everyone in the field, regardless of experience, access to the right resources and the right people.",
+    follow_h:"Follow us", follow_p:"For updates, vacancies and industry content",
+    footer_p:"A community, virtual internship, career roadmap and digital tools platform for Azerbaijan's construction industry.",
+    rights:"All rights reserved.",
+    ai_title:"IndustrCons Assistant", ai_status:"Offline · Keyword-based", ai_send:"Send", ai_ph:"Type your question... (e.g. estimator)",
+    ai_greet:"Hi! I'm IndustrCons' offline assistant. Try a keyword: estimator, docs, internship, jobs, CV, certificate, group, contact.",
+    ai_fallback:"I didn't quite catch that. Try: 'estimator', 'docs', 'internship', 'jobs', 'CV', 'certificate', or contact support directly: +994 77 588 97 27",
+  },
+  ru: {
+    nav_tools:"Инструменты", nav_eco:"Платформы", nav_events:"IC Events", nav_groups:"Сообщество", nav_intern:"Виртуальная стажировка", nav_roadmap:"Карьерный путь", nav_about:"О нас", nav_join:"Вступить",
+    hero_eyebrow:"Азербайджан · Сеть строительства и инженерии",
+    hero_title:'Объединяем людей и <span>инструменты</span> строительной отрасли.',
+    hero_sub:"IndustrCons — сообщество, где инженеры, специалисты и студенты делятся вакансиями и создают деловые связи. Estimator, Docs, Workspace, AI, Knowledge Center, Games, виртуальная стажировка и карта инженерии — всё в одной экосистеме.",
+    hero_cta1:"Изучить экосистему", hero_cta2:"Посмотреть группы сообщества",
+    stat1:"цифровых платформ", stat2:"специализированных групп", stat3:"участников", stat4:"языки: AZ / EN / RU",
+    tools_tag:"Цифровые инструменты", tools_h2:"Цифровые инструменты для ускорения работы", tools_p:"Инструменты, рождённые нашим сообществом — созданы под реальные нужды отрасли, бесплатны для использования.",
+    est_p:"Рассчитайте стоимость проекта за секунды: точная смета по площади, этажам и типу здания, объём материалов и PDF-отчёт для печати.",
+    est_l1:"Мастер сметы из 7 шагов с визуальной панелью", est_l2:"Региональные ценовые коэффициенты (Баку, Гянджа, Сумгайыт и др.)", est_l3:"Фирменный PDF-отчёт с QR-кодом",
+    docs_p:"80+ готовых PDF-шаблонов, инженерные калькуляторы и Excel-инструменты для HSE, документооборота и инженерии на объекте.",
+    docs_l1:"86+ готовых шаблонов документов в 4 категориях", docs_l2:"18 инженерных калькуляторов (объём бетона, вес арматуры и др.)", docs_l3:"Полностью на азербайджанском, в форматах для печати",
+    ws_p:"Полноценное рабочее пространство для управления проектами прямо в браузере: канбан-доска, дневник объекта, реестр рисков и инженерные калькуляторы — всё в одном месте.",
+    ws_l1:"Канбан-доска, Дашборд, Дневник объекта, Ежедневный планировщик", ws_l2:"Реестр рисков, чек-листы QA/QC и безопасности", ws_l3:"BOQ, калькуляторы объёма бетона и веса арматуры — данные хранятся на вашем устройстве",
+    open_btn:"Открыть ↗", go:"Перейти →", soon:"Скоро",
+    eco_tag:"Экосистема", eco_h2:"Платформы IndustrCons", eco_p:"Помимо Estimator и Docs — другие платформы нашего сообщества.",
+    eco1_h:"Knowledge Center", eco1_p:"Структурированная база знаний и ресурсы по строительству и инженерии.",
+    eco2_h:"IndustrCons AI", eco2_p:"ИИ-ассистент для строительной отрасли — отвечает на вопросы и рекомендует ресурсы.",
+    eco3_h:"IndustrCons Games", eco3_p:"Интерактивные игры, закрепляющие инженерные знания в игровой форме.",
+    eco4_h:"Virtual Internship", eco4_p:"Программа виртуальной стажировки на основе задач — практика на реальных сценариях.",
+    eco5_h:"Engineering Map", eco5_p:"Интерактивная карта инженерных специальностей, компаний и проектов.",
+    eco6_h:"Engineering Comics", eco6_p:"Образовательный ресурс, объясняющий инженерные концепции в формате комиксов — просто, наглядно и запоминающе.",
+    eco8_h:"SkillsHub", eco8_p:"Университетские специализированные программы: доступ к YouTube и другим конспектам по предметам, возможность ускоренно пройти уже известный предмет, диплом и сертификат по завершении.", in_dev:"В разработке",
+    eco7_h:"Новые платформы", eco7_p:"Наша экосистема продолжает расти — новые инструменты уже в пути.",
+    events_tag:"IC Events", events_h2:"Проводите мероприятия по лицензии", events_p:"IC Event — сеть сообщества мероприятий, созданная IndustrCons. Наши корни в инженерии, но мы открыты для заявок из других сфер.",
+    ev_b1:"🌍 Глобально", ev_b2:"📍 Локально", ev_b3:"🎓 Университеты", ev_b4:"🏢 Офисы", ev_b5:"💻 Онлайн", ev_b6:"🤝 Офлайн", ev_b7:"🔀 Гибрид",
+    events_desc:"В компании, университете, общественном месте или онлайн — с лицензией IC Event вы можете организовать мероприятие где угодно и в любом формате. Формат гибкий: живой семинар, эпизод подкаста, вебинар или гибридная конференция — в Баку или в любой точке мира.",
+    ev_f1:"<b>Стандарт:</b> Живое очное мероприятие в компании, университете или общественном месте.", ev_f2:"<b>Green Events:</b> Мероприятия об устойчивом развитии и зелёной инженерии.", ev_f3:"<b>Подкаст:</b> Записанные разговорные эпизоды, публикуются на YouTube.", ev_f4:"<b>Вебинар:</b> Онлайн, для удалённых участников, по любой теме.", ev_f5:"<b>Гибрид:</b> И в зале, и онлайн — для более широкой аудитории.",
+    ev_apply:"Подать заявку на лицензию", ev_visit:"Перейти на IC Events ↗", ev_active:"АКТИВНО · БАКУ, АЗЕРБАЙДЖАН", ev_organizer:"Организатор: Эльвин Аскеров · Партнёр: MÜSİAD", ev_dates:"Лицензия с: 19.08.2026 · Действительна до: 19.08.2027", ev_registry:"Смотреть весь реестр →", ev_youtube:"▶️ Канал YouTube",
+    groups_tag:"Сообщество", groups_h2:"Вступите в группу по вашей специальности", groups_p:"Группы по специальностям для вакансий, обмена опытом и нетворкинга.",
+    g1_h:"Вакансии в строительстве 1 и 2", g1_p:"Инженер, руководитель объекта и другие вакансии в строительстве.",
+    g2_h:"Общие вакансии", g2_p:"Вакансии из разных отраслей и поддержка соискателей.",
+    g3_h:"Группа HSE", g3_p:"Обсуждения и вакансии по охране труда и безопасности.",
+    g4_h:"Топограф и ГЕО-инженер", g4_p:"Специалисты по геодезии и топографии.",
+    g5_h:"Инженеры MEP", g5_p:"Специалисты по механическим, электрическим и сантехническим системам.",
+    g6_h:"Сеть HR", g6_p:"Группа для нетворкинга HR-специалистов.",
+    g7_h:"Тендеры", g7_p:"Актуальные тендеры и возможности заключения контрактов.",
+    g8_h:"Группа мастеров/рабочих", g8_p:"Вакансии и связи для мастеров и рабочих на объекте.",
+    g9_p:"Специалисты по управлению проектами.",
+    g10_p:"Специалисты по контролю и обеспечению качества.",
+    g11_p:"Специалисты по планированию проектов и графикам.",
+    g12_h:"Поддержка молодёжи и студентов", g12_p:"Наставничество, стажировки и карьерная поддержка для студентов и выпускников.",
+    join:"Вступить →", wp_channel:"Канал WhatsApp", wp_groups:"Группы WhatsApp",
+    int_tag:"Виртуальная стажировка", int_h2:"Виртуальная стажировка + Наставничество + Волонтёрство",
+    int_p:"2-месячная практическая программа при поддержке инженеров и специалистов отрасли — для тех, у кого мало опыта или его нет.",
+    months:"месяца", fact1:"проводится в определённые периоды", fact2_b:"Специалисты отрасли", fact2:"наставничество от инженеров",
+    fact3_b:"Практика", fact3:"задания на основе реальных сценариев", fact4_b:"Сертификат", fact4:"выдаётся по завершении программы",
+    soon_h:"🚀 Скоро появится", soon1:"Загрузка резюме и создание профиля", soon2:"Панель размещения вакансий", soon3:"Уведомления о ежедневных вакансиях", soon4:"Другие виды стажировок (скоро)",
+    cv_h:"📄 Услуга подготовки резюме и LinkedIn", cv_p:"Свяжитесь с нами для профессиональной подготовки резюме и профиля LinkedIn.",
+    steps_h:"Процедура приёма",
+    step1_h:"Заполнение анкеты", step1_p:"Первичная оценка на основе анкеты и резюме.",
+    step2_h:"Мини-тест", step2_p:"Короткий тест на знание отрасли.",
+    step3_h:"Видео-собеседование", step3_p:"Короткая встреча с командой наставников.",
+    step4_h:"Поздравляем 🎉", step4_p:"Зачисление в программу и начало 2-месячной стажировки.",
+    rm_tag:"Карьера", rm_h2:"Карьерный путь в строительстве", rm_p:"Пошаговый карьерный путь по 10 направлениям, адаптированный под рынок Азербайджана. Нажмите на этап, чтобы увидеть навыки, сроки и сертификаты.",
+    rm_branch:'<b>Параллельные специализации:</b> начиная с уровня инженера объекта, можно также развиваться в QA/QC, планировании, HSE, сметном деле (Estimation) или MEP.',
+    nav_consulting:"Consulting",
+    cons_phase:"🔭 Будущий этап · Идёт исследование",
+    cons_tag:"IndustrCons Consulting", cons_h2:"Прямые исполнительные услуги в строительстве",
+    cons_p:"Развивая своё сообщество, IndustrCons готовится предложить исполнительные услуги в роли подрядчика или субподрядчика — с опытными командами и по справедливым ценам. Сейчас мы на этапе исследования рынка и планирования пилота.",
+    cons1_h:"Железобетонные работы", cons1_p:"Командная поддержка по вязке арматуры, монтажу опалубки, заливке и вибрации бетона.",
+    cons2_h:"Гипсокартон", cons2_p:"Монтаж систем стен и потолков, перегородок и каркасных конструкций.",
+    cons3_h:"Изоляция", cons3_p:"Профессиональное выполнение тепло-, гидро- и звукоизоляции.",
+    cons4_h:"Штукатурные и отделочные работы", cons4_p:"Штукатурка стен, выравнивание поверхностей и нанесение отделочных покрытий.",
+    cons5_h:"Технический надзор (Supervising)", cons5_p:"Технический контроль за деятельностью подрядчика, обеспечение качества и графика.",
+    cons6_h:"Услуги подрядчика / субподрядчика", cons6_p:"Исполнительная команда, берущая на себя часть или весь объём проекта.",
+    cons_cta1:"✆ Оставить заявку (WhatsApp)", cons_cta2:"✉️ Написать для подробностей",
+    cons_note:"Примечание: эти услуги сейчас на этапе планирования, официальная дата запуска не объявлена. Заинтересованные могут зарегистрироваться заранее.",
+    nav_mission:"Миссия",
+    mvv_tag:"Миссия · Видение · Ценности", mvv_h2:"Почему мы существуем", mvv_p:"Основные принципы, которыми руководствуется IndustrCons.",
+    mission_h:"Миссия", mission_p:"Дать каждому, кто работает в строительной и инженерной отрасли Азербайджана — от опытных специалистов до студентов — равный доступ к нужным ресурсам, нужным людям и цифровым инструментам.",
+    vision_h:"Видение", vision_p:"Стать крупнейшей и самой надёжной цифровой экосистемой строительства и инженерии в Азербайджане — платформой, которая поддерживает на каждом этапе, от обучения до карьеры.",
+    values_h:"Ценности",
+    value1:"<b>Прозрачность</b> — открытое и честное общение", value2:"<b>Профессионализм</b> — качественный, надёжный контент", value3:"<b>Равные возможности</b> — поддержка независимо от опыта", value4:"<b>Дух сообщества</b> — совместный рост и взаимоподдержка", value5:"<b>Инновации</b> — непрерывное цифровое развитие",
+    about_tag:"О нас", about_h2:"Что такое IndustrCons?", about_p:"Начавшись с одной группы WhatsApp, сегодня это одна из самых активных цифровых экосистем строительства и инженерии в Азербайджане.",
+    p1_h:"Обмен вакансиями", p1_p:"Мы напрямую связываем соискателей и работодателей в группах по специальностям.",
+    p2_h:"Нетворкинг", p2_p:"От инженера объекта до подрядчика — пространство для связей для всех в отрасли.",
+    p3_h:"Стажировка и наставничество", p3_p:"Практическая поддержка и сертификация от профессионалов для тех, у кого мало опыта.",
+    p4_h:"Карьерный путь", p4_p:"Отслеживайте карьерный рост, навыки и сертификаты в отрасли.",
+    p5_h:"Цифровые инструменты", p5_p:"Estimator, Docs, Workspace, AI, Knowledge Center, Games и Engineering Map.",
+    p6_h:"Поддержка CV и LinkedIn", p6_p:"Прямая услуга поддержки для создания профессионального профиля.",
+    founder_tag:"Основатель IndustrCons",
+    founder_p:"IndustrCons возник из потребности в прозрачной коммуникации, доступной оценке стоимости и профессиональной поддержке в строительном секторе Азербайджана. Цель — дать каждому в отрасли, независимо от опыта, доступ к нужным ресурсам и нужным людям.",
+    follow_h:"Подписывайтесь на нас", follow_p:"Новости, вакансии и отраслевой контент",
+    footer_p:"Платформа сообщества, виртуальной стажировки, карьерного пути и цифровых инструментов для строительной отрасли Азербайджана.",
+    rights:"Все права защищены.",
+    ai_title:"Ассистент IndustrCons", ai_status:"Офлайн · По ключевым словам", ai_send:"Отправить", ai_ph:"Введите вопрос... (напр. estimator)",
+    ai_greet:"Привет! Я офлайн-ассистент IndustrCons. Попробуйте ключевое слово: estimator, docs, стажировка, вакансии, CV, сертификат, группа, контакт.",
+    ai_fallback:"Не совсем понял. Попробуйте: 'estimator', 'docs', 'стажировка', 'вакансии', 'CV', 'сертификат' или свяжитесь напрямую: +994 77 588 97 27",
+  }
+};
+let currentLang = "az";
+function applyLang(lang){
+  try{
+    currentLang = lang;
+    document.getElementById('html-root').setAttribute('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(I18N[lang] && I18N[lang][key] !== undefined){ el.innerHTML = I18N[lang][key]; }
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-ph');
+      if(I18N[lang] && I18N[lang][key] !== undefined){ el.setAttribute('placeholder', I18N[lang][key]); }
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang')===lang);
+    });
+    if(typeof renderChips === 'function'){ renderChips(); }
+  }catch(err){ console.error('IndustrCons lang switch error:', err); }
+}
+document.addEventListener('DOMContentLoaded', function(){
+  try{
+    document.querySelectorAll('.lang-switch button').forEach(function(btn){
+      btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang')); });
+    });
+  }catch(err){ console.error('IndustrCons init error:', err); }
+});
+</script>
+
+<script>
+/* ===================== AI ASSISTANT (offline, keyword-based) ===================== */
+try{
+var AI_RULES = [
+  {kw:["estimator","smeta","hesabla","смета","calculate"], az:"Estimator ilə tikinti layihənizin smetasını saniyələr içində hesablaya bilərsiniz: https://industrconsestimator.netlify.app/", en:"With Estimator you can calculate your construction project's cost in seconds: https://industrconsestimator.netlify.app/", ru:"С Estimator вы можете рассчитать смету проекта за секунды: https://industrconsestimator.netlify.app/"},
+  {kw:["docs","sənəd","şablon","документ","template"], az:"Docs platformasında 80+ hazır sənəd şablonu və mühəndis kalkulyatorları var: https://industrconsdocs.netlify.app/", en:"On Docs you'll find 80+ ready document templates and engineering calculators: https://industrconsdocs.netlify.app/", ru:"На Docs есть 80+ готовых шаблонов документов и инженерные калькуляторы: https://industrconsdocs.netlify.app/"},
+  {kw:["workspace","kanban","iş sahəsi","рабочее пространство"], az:"Workspace ilə Kanban lövhə, sahə gündəliyi, risk reyestri və kalkulyatorları brauzerinizdə idarə edin: https://elvinasgar.github.io/IndustrCons-Workspace-/", en:"Manage your Kanban board, site diary, risk register and calculators right in your browser with Workspace: https://elvinasgar.github.io/IndustrCons-Workspace-/", ru:"Управляйте канбан-доской, дневником объекта, реестром рисков и калькуляторами прямо в браузере с Workspace: https://elvinasgar.github.io/IndustrCons-Workspace-/"},
+  {kw:["ai","süni intellekt","искусственный"], az:"IndustrCons AI köməkçisini burdan sınayın: https://elvinasgar.github.io/IndustrCons-AI/", en:"Try the IndustrCons AI assistant here: https://elvinasgar.github.io/IndustrCons-AI/", ru:"Попробуйте ИИ-ассистента IndustrCons здесь: https://elvinasgar.github.io/IndustrCons-AI/"},
+  {kw:["game","oyun","игра"], az:"Mühəndislik oyunlarımıza baxın: https://elvinasgar.github.io/IndustrCons-Games/", en:"Check out our engineering games: https://elvinasgar.github.io/IndustrCons-Games/", ru:"Посмотрите наши инженерные игры: https://elvinasgar.github.io/IndustrCons-Games/"},
+  {kw:["map","xəritə","карта"], az:"Engineering Map ilə sahə və şirkətləri kəşf edin: https://elvinasgar.github.io/IndustrCons-Enginering-Map/", en:"Explore the field with Engineering Map: https://elvinasgar.github.io/IndustrCons-Enginering-Map/", ru:"Исследуйте отрасль с Engineering Map: https://elvinasgar.github.io/IndustrCons-Enginering-Map/"},
+  {kw:["comics","komiks","комикс"], az:"Mühəndislik anlayışlarını komiks formatında öyrənin: https://elvinasgar.github.io/IndustrCons-Engineering-Comics/", en:"Learn engineering concepts through comics: https://elvinasgar.github.io/IndustrCons-Engineering-Comics/", ru:"Изучайте инженерные концепции в формате комиксов: https://elvinasgar.github.io/IndustrCons-Engineering-Comics/"},
+  {kw:["mission","missiya","миссия","vision","vizyon","видение","values","dəyər","ценност"], az:"IndustrCons-un missiya, vizyon və dəyərlərini #mission bölməsində tapa bilərsiniz.", en:"You can find IndustrCons' mission, vision and values in the #mission section.", ru:"Миссию, видение и ценности IndustrCons вы найдёте в разделе #mission."},
+  {kw:["təcrübə","internship","стажировка","virtual"], az:"Virtual Təcrübə Proqramımız 2 aylıqdır, mentorluq və sertifikat daxildir. Ətraflı: #internship bölməsinə baxın və ya https://elvinasgar.github.io/IndustrCons-Virtual-Internship/", en:"Our Virtual Internship Program is 2 months, includes mentorship and a certificate. See the #internship section or https://elvinasgar.github.io/IndustrCons-Virtual-Internship/", ru:"Наша программа виртуальной стажировки длится 2 месяца, включает наставничество и сертификат. Смотрите раздел #internship или https://elvinasgar.github.io/IndustrCons-Virtual-Internship/"},
+  {kw:["vakansiya","iş","job","vacancy","вакансия","работа"], az:"Vakansiyalar üçün İnşaat Vakansiyaları, Ümumi Vakansiyalar və digər ixtisas qruplarımıza qoşulun (#groups bölməsi).", en:"For jobs, join our Construction Jobs, General Vacancies and other specialty groups (#groups section).", ru:"Для вакансий вступите в наши группы (раздел #groups)."},
+  {kw:["cv","linkedin","резюме"], az:"CV və LinkedIn hazırlama xidmətimiz var — WhatsApp: +994 77 588 97 27", en:"We offer CV & LinkedIn preparation — WhatsApp: +994 77 588 97 27", ru:"У нас есть услуга подготовки CV и LinkedIn — WhatsApp: +994 77 588 97 27"},
+  {kw:["sertifikat","certificate","сертификат"], az:"Virtual Təcrübə Proqramını uğurla bitirənlərə sertifikat təqdim olunur.", en:"A certificate is awarded to those who successfully complete the Virtual Internship Program.", ru:"Сертификат выдаётся тем, кто успешно завершил программу стажировки."},
+  {kw:["qrup","group","группа"], az:"12+ ixtisas qrupumuz var: HSE, MEP, HR, Tenderlər, PM, QA/QC, Planning və s. #groups bölməsinə baxın.", en:"We have 12+ specialty groups: HSE, MEP, HR, Tenders, PM, QA/QC, Planning and more. See #groups.", ru:"У нас 12+ групп по специальностям: HSE, MEP, HR, тендеры, PM, QA/QC, планирование и др. Смотрите #groups."},
+  {kw:["roadmap","karyera","карьера","career"], az:"Karyera Yol Xəritəmizə #roadmap bölməsindən baxa bilərsiniz — Site Engineer-dən Construction Director-a qədər.", en:"Check our Career Roadmap in the #roadmap section — from Site Engineer to Construction Director.", ru:"Смотрите наш карьерный путь в разделе #roadmap — от инженера объекта до директора по строительству."},
+  {kw:["əlaqə","contact","контакт","telefon","phone"], az:"Bizimlə əlaqə: industrcons@gmail.com və ya WhatsApp +994 77 588 97 27", en:"Contact us: industrcons@gmail.com or WhatsApp +994 77 588 97 27", ru:"Свяжитесь с нами: industrcons@gmail.com или WhatsApp +994 77 588 97 27"},
+  {kw:["event","tədbir","мероприят","ic event","lisenziya","license","лицензия"], az:"IC Events ilə lisenziya əsasında tədbir keçirə bilərsiniz — universitet, ofis, onlayn və ya hibrid formatda: https://elvinasgar.github.io/IndustrCons-IC-events-/", en:"With IC Events you can run licensed events — at a university, office, online or hybrid: https://elvinasgar.github.io/IndustrCons-IC-events-/", ru:"С IC Events вы можете проводить мероприятия по лицензии — в университете, офисе, онлайн или гибридно: https://elvinasgar.github.io/IndustrCons-IC-events-/"},
+  {kw:["skillshub","skills hub","learninghub","learning hub","diplom","sertifikat kurs","university program"], az:"SkillsHub universitet səviyyəli proqramlar təklif edir, hazırda inkişaf mərhələsindədir: https://elvinasgar.github.io/IndustrCons-SkillsHub/", en:"SkillsHub offers university-level programs and is currently in development: https://elvinasgar.github.io/IndustrCons-SkillsHub/", ru:"SkillsHub предлагает университетские программы, сейчас в разработке: https://elvinasgar.github.io/IndustrCons-SkillsHub/"},
+  {kw:["consulting","podratçı","subpodratçı","beton","alçıpan","suvaq","izolyasiya","подряд","подрядчик","contractor"], az:"IndustrCons Consulting bölməsində podratçı/subpodratçı xidmətləri planlaşdırırıq — Dəmir-Beton, Alçıpan, İzolyasiya, Suvaq və s. Hazırda araşdırma mərhələsindədir: #consulting", en:"In the IndustrCons Consulting section we're planning contractor/subcontractor services — Reinforced Concrete, Drywall, Insulation, Plastering and more. Currently in research phase: #consulting", ru:"В разделе IndustrCons Consulting мы планируем услуги подрядчика/субподрядчика — железобетон, гипсокартон, изоляция, штукатурка и др. Сейчас на этапе исследования: #consulting"},
+  {kw:["salam","hello","hi","привет","salut"], az:"Salam! Sizə necə kömək edə bilərəm? (estimator, docs, təcrübə, vakansiya, CV, sertifikat, qrup, roadmap, əlaqə)", en:"Hello! How can I help? (estimator, docs, internship, jobs, CV, certificate, group, roadmap, contact)", ru:"Привет! Чем могу помочь? (estimator, docs, стажировка, вакансии, CV, сертификат, группа, карьера, контакт)"},
+];
+const QUICK_CHIPS = {
+  az:["estimator","docs","təcrübə","vakansiya","CV","əlaqə"],
+  en:["estimator","docs","internship","jobs","CV","contact"],
+  ru:["estimator","docs","стажировка","вакансии","CV","контакт"]
+};
+var aiOpened = false;
+function addMsg(text, who){
+  var body = document.getElementById('ai-body');
+  if(!body) return;
+  var d = document.createElement('div');
+  d.className = 'ai-msg ' + who;
+  d.textContent = text;
+  body.appendChild(d);
+  body.scrollTop = body.scrollHeight;
+}
+function renderChips(){
+  var q = document.getElementById('ai-quick');
+  var input = document.getElementById('ai-input');
+  if(!q || !input) return;
+  q.innerHTML = "";
+  var chips = QUICK_CHIPS[currentLang] || QUICK_CHIPS.az;
+  chips.forEach(function(word){
+    var c = document.createElement('button');
+    c.className = 'ai-chip';
+    c.type = 'button';
+    c.textContent = word;
+    c.addEventListener('click', function(){ input.value = word; handleAiSend(); });
+    q.appendChild(c);
+  });
+}
+function handleAiSend(){
+  var input = document.getElementById('ai-input');
+  if(!input) return;
+  var val = input.value.trim();
+  if(!val) return;
+  addMsg(val, 'user');
+  input.value = "";
+  var lower = val.toLowerCase();
+  var matched = null;
+  for(var i=0;i<AI_RULES.length;i++){
+    var rule = AI_RULES[i];
+    if(rule.kw.some(function(k){ return lower.indexOf(k) !== -1; })){ matched = rule; break; }
+  }
+  setTimeout(function(){
+    if(matched){ addMsg(matched[currentLang] || matched.az, 'bot'); }
+    else { addMsg((I18N[currentLang] && I18N[currentLang].ai_fallback) || I18N.az.ai_fallback, 'bot'); }
+  }, 300);
+}
+}catch(err){ console.error('IndustrCons AI setup error:', err); }
+
+document.addEventListener('DOMContentLoaded', function(){
+  try{
+    var aiToggle = document.getElementById('ai-toggle');
+    var aiPanel = document.getElementById('ai-panel');
+    var aiClose = document.getElementById('ai-close');
+    var aiInput = document.getElementById('ai-input');
+    var aiSend = document.getElementById('ai-send');
+    if(aiToggle && aiPanel){
+      aiToggle.addEventListener('click', function(){
+        aiPanel.classList.toggle('open');
+        if(!aiOpened){
+          aiOpened = true;
+          addMsg((I18N[currentLang] && I18N[currentLang].ai_greet) || I18N.az.ai_greet, 'bot');
+          renderChips();
+        }
+      });
+    }
+    if(aiClose && aiPanel){ aiClose.addEventListener('click', function(){ aiPanel.classList.remove('open'); }); }
+    if(aiSend){ aiSend.addEventListener('click', handleAiSend); }
+    if(aiInput){ aiInput.addEventListener('keydown', function(e){ if(e.key==='Enter') handleAiSend(); }); }
+  }catch(err){ console.error('IndustrCons AI init error:', err); }
+});
+</script>
+
+</body>
+</html>
