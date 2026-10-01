@@ -15,17 +15,16 @@ const ALLOWED_ORIGINS = [
 ];
 
 // ---- PERSONA LOCK (Prompt Manager) ----
-const SYSTEM_PROMPT = `Sən IndustrCons AI-san — IndustrCons şirkətinin tikinti mühəndisləri üçün AI köməkçisisən.
+const SYSTEM_PROMPT = `Sən IndustrCons AI-san — IndustrCons şirkətinin tikinti mühəndisləri üçün AI köməkçisisən. Təcrübəli, sakit, inamlı bir mütəxəssis kimi danış — qısa, dəqiq, lazımsız sözsüz.
 
 QAYDALAR (heç vaxt pozma):
-- Sən HEÇ VAXT hansı modeldən (Claude, GPT, Groq, Gemini və s.) istifadə etdiyini demirsən. Sən sadəcə "IndustrCons AI"-san.
-- Öz arxitekturan, hansı API-lərdən istifadə etdiyin barədə heç vaxt danışma.
+- Sən HEÇ VAXT hansı modeldən (Claude, GPT, Groq, Gemini və s.) istifadə etdiyini demirsən. Sən sadəcə "IndustrCons AI"-san. Öz arxitekturan barədə heç vaxt danışma.
 - Cavabların qısa, praktiki və mühəndis dilində olsun — akademik yox, sahə dilində.
-- HƏR sualda, ümumi cavab verməzdən ƏVVƏL, mövzuya uyğun olan IndustrCons resursunu (Knowledge Center, Docs və ya Cost Estimator) qısaca tövsiyə et — sonra ümumi məlumatı ver. Uyğun resurs yoxdursa, birbaşa ümumi cavab ver.
-- Mümkün olduqda IndustrCons modullarına yönləndir: Docs (NCR, QA/QC şablonları), Cost Estimator, Knowledge Center.
+- Heç vaxt markdown formatlaşdırma (**, ##, - siyahı və s.) istifadə etmə — sadə, təbii cümlələrlə yaz, çünki mətn adi çat qutusunda göstərilir.
+- Mövzuya uyğun olanda IndustrCons resurslarını (Docs, Cost Estimator, Knowledge Center) təbii şəkildə, cümlənin təbii axınında xatırlat — hazır şablon kimi yox, həmin anda ağlına gələn bir fikir kimi. Hər cavabda bunu etmə, yalnız doğrudan faydalı olanda.
 - İstifadəçinin dilində cavab ver (Azərbaycan dili prioritetdir, ingiliscə sorularsa ingiliscə cavab ver).
-- Münasib olduqda IndustrCons WhatsApp Community-yə (https://chat.whatsapp.com/JS7XVLh8v2I4HPLLshwTr2) qoşulmağı təklif et, amma bunu hər cavabda təkrarlama.
-- Əgər istifadəçi "Knowledge Center" və ya bənzəri tikinti bilik bazası haqqında soruşsa, bunun tezliklə əlavə olunacağını bildir.`;
+- WhatsApp Community-ni (https://chat.whatsapp.com/JS7XVLh8v2I4HPLLshwTr2) çox nadir hallarda, təbii şəkildə xatırlat — hər cavabda yox, bəlkə hər 5-6 cavabdan birində, sırf söhbətin sonunda bir cümlə ilə, məcburi hiss olunmadan. Heç vaxt bunu "lakin" və ya "amma" ilə əlavə edib süni şəkildə birləşdirmə.
+- Əgər istifadəçi "Knowledge Center" haqqında soruşsa, bunun tikinti biliyi və standartlar üçün IndustrCons resursu olduğunu sadə şəkildə de.`;
 
 // ---- TOOL ROUTER (deterministic — mirrors frontend/js/api-client.js _localFallback) ----
 const INTENT_RULES = [
@@ -77,7 +76,7 @@ function corsHeaders(origin) {
 }
 
 // ---- PROVIDER SELECTOR ----
-// Primary: Groq (fast, cheap). Fallback: Claude (used automatically if Groq
+// Primary: Groq (fast, cheap). Fallback: Cloudflare Workers AI (used automatically if Groq
 // fails or times out). Add more providers here later the same way.
 async function callGroq(env, message, history, lang) {
   const messages = [
@@ -109,32 +108,21 @@ async function callGroq(env, message, history, lang) {
   return data.choices?.[0]?.message?.content?.trim() || "";
 }
 
-async function callClaude(env, message, history, lang) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "x-api-key": env.CLAUDE_API_KEY,
-      "anthropic-version": "2023-06-01",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      model: "claude-sonnet-5",
-      max_tokens: 500,
-      system: SYSTEM_PROMPT + `\n\nCavab dili: ${lang === "en" ? "English" : "Azərbaycan dili"}`,
-      messages: [
-        ...history.slice(-6).map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: m.content })),
-        { role: "user", content: message }
-      ]
-    })
+async function callWorkersAI(env, message, history, lang) {
+  // Cloudflare Workers AI — included free with your Cloudflare account.
+  // Requires an "AI" binding on this Worker (Settings → Bindings → Add → Workers AI → variable name "AI").
+  const messages = [
+    { role: "system", content: SYSTEM_PROMPT + `\n\nCavab dili: ${lang === "en" ? "English" : "Azərbaycan dili"}` },
+    ...history.slice(-6),
+    { role: "user", content: message }
+  ];
+
+  const result = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+    messages,
+    max_tokens: 500
   });
 
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error("claude_api_error: " + errText);
-  }
-
-  const data = await res.json();
-  return data.content?.[0]?.text?.trim() || "";
+  return (result?.response || "").trim();
 }
 
 export default {
@@ -180,14 +168,14 @@ export default {
     }
 
     // 2. No module matched — fall through to the LLM.
-    // Try Groq first (fast). If it fails, automatically fall back to Claude.
+    // Try Groq first (fast). If it fails, automatically fall back to Workers AI.
     try {
       let raw;
       try {
         raw = await callGroq(env, message, history, lang);
       } catch (groqErr) {
-        console.error("Groq failed, falling back to Claude:", groqErr.message);
-        raw = await callClaude(env, message, history, lang);
+        console.error("Groq failed, falling back to Workers AI:", groqErr.message);
+        raw = await callWorkersAI(env, message, history, lang);
       }
       const clean = sanitize(raw);
       return new Response(JSON.stringify({ reply: clean, action: null }), {
