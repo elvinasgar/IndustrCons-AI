@@ -24,7 +24,27 @@ QAYDALAR (heç vaxt pozma):
 - Mövzuya uyğun olanda IndustrCons resurslarını (Docs, Cost Estimator, Knowledge Center) təbii şəkildə, cümlənin təbii axınında xatırlat — hazır şablon kimi yox, həmin anda ağlına gələn bir fikir kimi. Hər cavabda bunu etmə, yalnız doğrudan faydalı olanda.
 - İstifadəçinin dilində cavab ver (Azərbaycan dili prioritetdir, ingiliscə sorularsa ingiliscə cavab ver).
 - WhatsApp Community-ni (https://chat.whatsapp.com/JS7XVLh8v2I4HPLLshwTr2) çox nadir hallarda, təbii şəkildə xatırlat — hər cavabda yox, bəlkə hər 5-6 cavabdan birində, sırf söhbətin sonunda bir cümlə ilə, məcburi hiss olunmadan. Heç vaxt bunu "lakin" və ya "amma" ilə əlavə edib süni şəkildə birləşdirmə.
-- Əgər istifadəçi "Knowledge Center" haqqında soruşsa, bunun tikinti biliyi və standartlar üçün IndustrCons resursu olduğunu sadə şəkildə de.`;
+- Əgər istifadəçi "Knowledge Center" haqqında soruşsa, bunun tikinti biliyi və standartlar üçün IndustrCons resursu olduğunu sadə şəkildə de.
+- Əgər istifadəçi şəkil göndərsə: gördüklərini qısa və konkret təsvir et (material, çatlaq, armatur, təhlükəsizlik pozuntusu, avadanlıq və s.), mümkün riskləri qeyd et, növbəti addımı təklif et. Şəkildən struktur təhlükəsizliyi barədə qəti hökm vermə — "şəkildən belə görünür, yerində lisenziyalı mühəndis yoxlamalıdır" kimi ehtiyatlı ifadə işlət.`;
+
+const VISION_MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"; // Groq vision model
+const TEXT_MODEL = "openai/gpt-oss-120b";
+const MAX_IMAGE_CHARS = 3500000; // Groq limit is ~4MB base64
+
+function buildSystem(lang, project) {
+  let s = SYSTEM_PROMPT + `\n\nCavab dili: ${lang === "en" ? "English" : "Azərbaycan dili"}`;
+  if (project) {
+    s += `\n\nİstifadəçi hazırda "${project}" adlı layihə üzərində işləyir. Uyğun olanda cavabı bu layihə kontekstinə uyğunlaşdır.`;
+  }
+  return s;
+}
+
+// Only allow plain user/assistant text turns (blocks fake "system" turns from the client)
+function cleanHistory(history) {
+  return history
+    .filter(m => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
+    .map(m => ({ role: m.role, content: m.content.slice(0, 2000) }));
+}
 
 // ---- TOOL ROUTER (deterministic — mirrors frontend/js/api-client.js _localFallback) ----
 const INTENT_RULES = [
@@ -78,25 +98,14 @@ function corsHeaders(origin) {
 // ---- PROVIDER SELECTOR ----
 // Primary: Groq (fast, cheap). Fallback: Cloudflare Workers AI (used automatically if Groq
 // fails or times out). Add more providers here later the same way.
-async function callGroq(env, message, history, lang) {
-  const messages = [
-    { role: "system", content: SYSTEM_PROMPT + `\n\nCavab dili: ${lang === "en" ? "English" : "Azərbaycan dili"}` },
-    ...history.slice(-6), // keep last few turns only (MVP context window)
-    { role: "user", content: message }
-  ];
-
+async function groqChat(env, model, messages, maxTokens) {
   const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${env.GROQ_API_KEY}`,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      model: "openai/gpt-oss-120b", // llama-3.3-70b-versatile was decommissioned Aug 16, 2026
-      messages,
-      temperature: 0.4,
-      max_tokens: 500
-    })
+    body: JSON.stringify({ model, messages, temperature: 0.4, max_tokens: maxTokens })
   });
 
   if (!res.ok) {
@@ -108,11 +117,39 @@ async function callGroq(env, message, history, lang) {
   return data.choices?.[0]?.message?.content?.trim() || "";
 }
 
-async function callWorkersAI(env, message, history, lang) {
+async function callGroq(env, message, history, lang, project) {
+  const messages = [
+    { role: "system", content: buildSystem(lang, project) },
+    ...history.slice(-6), // keep last few turns only
+    { role: "user", content: message }
+  ];
+  return groqChat(env, TEXT_MODEL, messages, 500);
+}
+
+// Photo analysis (vision). The image arrives as a data URL from the browser.
+async function callGroqVision(env, message, history, lang, project, image) {
+  const question = message || (lang === "en"
+    ? "Analyze this site photo."
+    : "Bu sahə şəklini təhlil et.");
+  const messages = [
+    { role: "system", content: buildSystem(lang, project) },
+    ...history.slice(-4),
+    {
+      role: "user",
+      content: [
+        { type: "text", text: question },
+        { type: "image_url", image_url: { url: image } }
+      ]
+    }
+  ];
+  return groqChat(env, VISION_MODEL, messages, 700);
+}
+
+async function callWorkersAI(env, message, history, lang, project) {
   // Cloudflare Workers AI — included free with your Cloudflare account.
   // Requires an "AI" binding on this Worker (Settings → Bindings → Add → Workers AI → variable name "AI").
   const messages = [
-    { role: "system", content: SYSTEM_PROMPT + `\n\nCavab dili: ${lang === "en" ? "English" : "Azərbaycan dili"}` },
+    { role: "system", content: buildSystem(lang, project) },
     ...history.slice(-6),
     { role: "user", content: message }
   ];
@@ -149,13 +186,41 @@ export default {
     }
 
     const message = (body.message || "").toString().slice(0, 2000); // basic input limit
-    const history = Array.isArray(body.history) ? body.history.slice(-10) : [];
+    const history = Array.isArray(body.history) ? cleanHistory(body.history.slice(-10)) : [];
     const lang = body.lang === "en" ? "en" : "az";
+    const project = (body.project || "").toString().replace(/["\r\n]/g, " ").trim().slice(0, 60);
+    const image = typeof body.image === "string" ? body.image : "";
 
-    if (!message) {
+    if (!message && !image) {
       return new Response(JSON.stringify({ error: "empty_message" }), {
         status: 400, headers: corsHeaders(origin)
       });
+    }
+
+    // 0. PHOTO ANALYSIS — if a photo was attached, go straight to the vision model
+    if (image) {
+      if (!image.startsWith("data:image/") || image.length > MAX_IMAGE_CHARS) {
+        return new Response(JSON.stringify({
+          reply: lang === "en"
+            ? "That photo is too large or in an unsupported format. Please try a smaller JPG or PNG."
+            : "Şəkil çox böyükdür və ya format dəstəklənmir. Daha kiçik JPG və ya PNG yoxlayın.",
+          action: null
+        }), { headers: corsHeaders(origin) });
+      }
+      try {
+        const raw = await callGroqVision(env, message, history, lang, project, image);
+        return new Response(JSON.stringify({ reply: sanitize(raw), action: null }), {
+          headers: corsHeaders(origin)
+        });
+      } catch (err) {
+        console.error("Vision error:", err.message);
+        return new Response(JSON.stringify({
+          reply: lang === "en"
+            ? "I couldn't analyze the photo right now. Please try again shortly."
+            : "Şəkli hazırda təhlil edə bilmədim. Bir az sonra yenidən cəhd edin.",
+          action: null
+        }), { headers: corsHeaders(origin) });
+      }
     }
 
     // 1. TOOL ROUTER — IndustrCons modules always win first
@@ -172,10 +237,10 @@ export default {
     try {
       let raw;
       try {
-        raw = await callGroq(env, message, history, lang);
+        raw = await callGroq(env, message, history, lang, project);
       } catch (groqErr) {
         console.error("Groq failed, falling back to Workers AI:", groqErr.message);
-        raw = await callWorkersAI(env, message, history, lang);
+        raw = await callWorkersAI(env, message, history, lang, project);
       }
       const clean = sanitize(raw);
       return new Response(JSON.stringify({ reply: clean, action: null }), {
